@@ -1,14 +1,74 @@
-python3 from powerline.vim import setup as powerline_setup
-python3 powerline_setup()
-python3 del powerline_setup
+call plug#begin('~/.vim/plugged')
+
+Plug 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdtree'
+Plug 'benmills/vimux'
+Plug 'benekastah/neomake'
+Plug 'chriskempson/base16-vim'
+Plug 'slurps-mad-rips/cmake.vim'
+Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
+Plug 'Valloric/YouCompleteMe'
+Plug 'mattn/emmet-vim'
+Plug 'edkolev/promptline.vim'
+Plug 'edkolev/tmuxline.vim'
+Plug 'leafgarland/typescript-vim'
+Plug 'Bling/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'd1ff/vim-cmake-project'
+Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'vim-ctrlspace/vim-ctrlspace'
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+Plug 'jistr/vim-nerdtree-tabs'
+Plug 'peterhoeg/vim-qml'
+Plug 'szw/vim-tags'
+Plug 'jalvesaq/vimcmdline'
+Plug 'benmills/vimux'
+Plug 'majutsushi/tagbar'
+Plug 'vim-scripts/TagHighlight'
+Plug 'clones/vim-fuzzyfinder'
+Plug 'clones/vim-l9'
+Plug 'LucHermitte/lh-cmake'
+Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+let g:UltiSnipsExpandTrigger="<C-l>"
+let g:UltiSnipsJumpForwardTrigger="<C-]>"
+let g:UltiSnipsJumpBackwardTrigger="<C-[>"
+
+call plug#end()
+
+"let g:airline_powerline_fonts = 0 
+let g:tmuxline_powerline_separators = 0
+let g:promptline_powerline_symbols = 0
+let g:ycm_confirm_extra_conf = 0
+let g:airline#extensions#tabline#enabled = 1
+let g:cmdline_in_buffer = 0
+if has('python')
+    let g:jedi#force_py_version = 2
+    let g:syntastic_python_python_exec = 'python2'
+    let g:pymode_python = 'python2'
+    let g:syntastic_python_python_exec = 'python2'
+
+    "python from powerline.vim import setup as powerline_setup
+    "python powerline_setup()
+    "python del powerline_setup
+elseif has('python3')
+    let g:jedi#force_py_version = 3
+    let g:syntastic_python_python_exec = 'python3'
+    let g:pymode_python = 'python3'
+    let g:syntastic_python_python_exec = 'python3'
+
+    "python3 from powerline.vim import setup as powerline_setup
+    "python3 powerline_setup()
+    "python3 del powerline_setup
+else
+    let g:loaded_jedi = 1
+endif
 
 let g:pymode_lint=0
 let g:pymode_lint_checker='pyflakes'
 let g:pymode_rope=0
-let g:syntastic_python_python_exec = 'python3'
 
-call pathogen#infect()
-call pathogen#helptags()
+let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
 
 filetype plugin indent on
 syntax on
@@ -19,19 +79,18 @@ let did_install_default_menus = 1
 let did_install_syntax_menu = 1
 let g:user_zen_leader_key = '<D-Space>'
 let g:clang_hl_errors = 0
+let g:clang_use_library = 1
+let g:clang_library_path = '/Library/Developer/CommandLineTools/usr/lib/libclang.dylib'
+let g:clang_compilation_database = '/Users/d1ff/Programming/fmtapper/build/'
 
-let g:solarized_contrast = 'high'
-let g:solarized_visibility = "high"
-colorscheme Tomorrow-Night
-set lines=999
-set columns=999
+"set lines=999
+"set columns=999
 
-" Settings --------------------------------------------------------------------
+"" Settings --------------------------------------------------------------------
 set nocompatible
 set modelines=1
 set tabstop=4 shiftwidth=4 softtabstop=4 expandtab
 set number ruler
-set encoding=utf-8
 set autoindent smartindent
 set showmode showcmd
 set hidden
@@ -87,18 +146,21 @@ map <leader>s? z=
 nmap <leader>f :set fu!<CR>
 map <leader>v :vsp $MYVIMRC<CR>
 map <leader>V :source $MYVIMRC<CR>
-map <leader>pt :Pytest file<CR>
+"map <leader>pt :Pytest file<CR>
 
 " Eclim maps
-nmap <leader>po :ProjectOpen 
-nmap <leader>pt :ProjectsTree<CR>
-nmap <leader>pcd :ProjectCD<CR>
-nmap <leader>plcd :ProjectLCD<CR>
+"nmap <leader>po :ProjectOpen 
+"nmap <leader>pt :ProjectsTree<CR>
+"nmap <leader>pcd :ProjectCD<CR>
+"nmap <leader>plcd :ProjectLCD<CR>
+
+" NerdTree Toogle
+nmap <leader>po :NERDTreeToggle<CR>
 
 nmap <leader>ac :Ack
 nmap <leader>cd :FufDir<CR>
 nmap <leader>of :FufFile<CR>
-nmap <leader>bu :FufBuffer<CR>
+nmap <leader>bu :CtrlSpace<CR>
 nmap <leader>er :Error<CR>
 nmap <leader>td :TaskList<CR>
 nmap <leader>gu :GundoToggle<CR>
@@ -159,9 +221,13 @@ if has("gui_running")
     set guioptions-=L
     set guioptions-=r
     set fuopt+=maxhorz
+    colorscheme Tomorrow-Night
 else
   set t_Co=256
   let g:indent_guides_indent_levels = 0
+  set background=dark
+  let base16colorspace=256
+  colorscheme base16-default
 endif
 
 " Tag list settings -----------------------------------------------------------
@@ -238,3 +304,21 @@ augroup END
 
 
 let g:syntastic_cpp_config_file = '.clang_complete'
+
+au BufRead,BufNewFile *.thrift set filetype=thrift
+au! Syntax thrift source ~/.vim/thrift.vim"
+
+"let loaded_matchparen=1 " Don't load matchit.vim (paren/bracket matching)
+"set noshowmatch         " Don't match parentheses/brackets
+"set nocursorline        " Don't paint cursor line
+"set nocursorcolumn      " Don't paint cursor column
+"set lazyredraw          " Wait to redraw
+"set scrolljump=8        " Scroll 8 lines at a time at bottom/top
+"let html_no_rendering=1 " Don't render italic, bold, links in HTML"
+"set noruler
+
+"" tagbar
+autocmd VimEnter * nested :call tagbar#autoopen(1)
+autocmd FileType * nested :call tagbar#autoopen(0)
+
+autocmd! BufWritePost * Neomake
