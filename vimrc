@@ -1,5 +1,21 @@
+source ~/.vim_github_issues
+" indent-guides
+let g:indent_guides_guide_size = 1
+let g:indent_guides_enable_on_vim_startup = 1
+
 call plug#begin('~/.vim/plugged')
 
+Plug 'godlygeek/tabular'
+Plug 'easymotion/vim-easymotion'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'tpope/vim-surround'
+
+let g:gissues_async_omni = 1
+let g:gissues_lazy_load = 1
+Plug 'jaxbot/github-issues.vim'
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'tmux-plugins/vim-tmux'
+Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'benmills/vimux'
@@ -29,44 +45,23 @@ Plug 'vim-scripts/TagHighlight'
 Plug 'clones/vim-fuzzyfinder'
 Plug 'clones/vim-l9'
 Plug 'LucHermitte/lh-cmake'
+let g:clamp_libclang_file = '/Users/d1ff/.vim/plugged/YouCompleteMe/third_party/ycmd/libclang.dylib'
+Plug 'bbchung/Clamp'
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
-let g:UltiSnipsExpandTrigger="<C-l>"
+let g:UltiSnipsExpandTrigger="<C-x><C-x>"
 let g:UltiSnipsJumpForwardTrigger="<C-]>"
 let g:UltiSnipsJumpBackwardTrigger="<C-[>"
+Plug 'solarnz/thrift.vim'
+Plug 'Glench/Vim-Jinja2-Syntax'
 
 call plug#end()
 
-"let g:airline_powerline_fonts = 0 
-let g:tmuxline_powerline_separators = 0
-let g:promptline_powerline_symbols = 0
+let g:airline_powerline_fonts = 1
+let g:tmuxline_powerline_separators = 1
+let g:promptline_powerline_symbols = 1
 let g:ycm_confirm_extra_conf = 0
 let g:airline#extensions#tabline#enabled = 1
 let g:cmdline_in_buffer = 0
-if has('python')
-    let g:jedi#force_py_version = 2
-    let g:syntastic_python_python_exec = 'python2'
-    let g:pymode_python = 'python2'
-    let g:syntastic_python_python_exec = 'python2'
-
-    "python from powerline.vim import setup as powerline_setup
-    "python powerline_setup()
-    "python del powerline_setup
-elseif has('python3')
-    let g:jedi#force_py_version = 3
-    let g:syntastic_python_python_exec = 'python3'
-    let g:pymode_python = 'python3'
-    let g:syntastic_python_python_exec = 'python3'
-
-    "python3 from powerline.vim import setup as powerline_setup
-    "python3 powerline_setup()
-    "python3 del powerline_setup
-else
-    let g:loaded_jedi = 1
-endif
-
-let g:pymode_lint=0
-let g:pymode_lint_checker='pyflakes'
-let g:pymode_rope=0
 
 let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
 
@@ -78,10 +73,6 @@ let g:colorsamplerpack_loaded = 1
 let did_install_default_menus = 1
 let did_install_syntax_menu = 1
 let g:user_zen_leader_key = '<D-Space>'
-let g:clang_hl_errors = 0
-let g:clang_use_library = 1
-let g:clang_library_path = '/Library/Developer/CommandLineTools/usr/lib/libclang.dylib'
-let g:clang_compilation_database = '/Users/d1ff/Programming/fmtapper/build/'
 
 "set lines=999
 "set columns=999
@@ -131,10 +122,10 @@ nnoremap <M-S-TAB> <C-w><C-p>
 nnoremap <C-tab> :bn<cr>
 nnoremap <c-s-tab> :bp<cr>
 " Smart way to move btw. windows
-nnoremap <C-j> <C-W>j
-nnoremap <C-k> <C-W>k
+"nnoremap <C-j> <C-W>j
+"nnoremap <C-k> <C-W>k
 nnoremap <C-h> <C-W>h
-nnoremap <C-l> <C-W>l
+"nnoremap <C-l> <C-W>l
 " Pressing ,ss will toggle and untoggle spell checking
 map <leader>ss :setlocal spell!<cr>
 
@@ -146,27 +137,14 @@ map <leader>s? z=
 nmap <leader>f :set fu!<CR>
 map <leader>v :vsp $MYVIMRC<CR>
 map <leader>V :source $MYVIMRC<CR>
-"map <leader>pt :Pytest file<CR>
 
-" Eclim maps
-"nmap <leader>po :ProjectOpen 
-"nmap <leader>pt :ProjectsTree<CR>
-"nmap <leader>pcd :ProjectCD<CR>
-"nmap <leader>plcd :ProjectLCD<CR>
-
-" NerdTree Toogle
-nmap <leader>po :NERDTreeToggle<CR>
-
-nmap <leader>ac :Ack
 nmap <leader>cd :FufDir<CR>
 nmap <leader>of :FufFile<CR>
 nmap <leader>bu :CtrlSpace<CR>
 nmap <leader>er :Error<CR>
-nmap <leader>td :TaskList<CR>
-nmap <leader>gu :GundoToggle<CR>
 nnoremap <silent> <leader>nt :NERDTreeToggle %:p:h<CR>
 nnoremap <silent> <leader>tl :TagbarToggle<CR>
-nmap <silent> <Leader>pr <Plug>ToggleProject
+
 ""Searching yamies
 nnoremap / /\v
 vnoremap / /\v
@@ -209,11 +187,8 @@ autocmd FileType python highlight BadWhitespace ctermbg=red guibg=red
 " c++
 autocmd FileType cpp set equalprg=astyle
 
-
-" Autocomplete settings -------------------------------------------------------
-let g:SuperTabDefaultCompletionType = "context"
-
 " View opts -------------------------------------------------------------------
+set background=dark
 if has("gui_running")
     set guifont=Droid\ Sans\ Mono\ for\ Powerline:h12
     "set noantialias " Terminus looks better that way
@@ -221,14 +196,11 @@ if has("gui_running")
     set guioptions-=L
     set guioptions-=r
     set fuopt+=maxhorz
-    colorscheme Tomorrow-Night
 else
   set t_Co=256
-  let g:indent_guides_indent_levels = 0
-  set background=dark
-  let base16colorspace=256
-  colorscheme base16-default
 endif
+let base16colorspace=256
+colorscheme base16-default
 
 " Tag list settings -----------------------------------------------------------
 let Tlist_Use_Right_Window=1
@@ -277,18 +249,6 @@ nnoremap <silent> <leader>fe :set foldenable!<cr>:call ToggleFoldColumn()<cr>
 au BufNewFile,BufRead *.less set filetype=less
 au BufNewFile,BufRead *.ino set filetype=c
 
-let g:indent_guides_enable_on_vim_startup = 1
-let g:pyflakes_use_quickfix = 1
-let g:pep8_map='<leader>8'
-
-" Execute the tests
-nmap <silent><Leader>tf <Esc>:Pytest file<CR>
-nmap <silent><Leader>tc <Esc>:Pytest class<CR>
-nmap <silent><Leader>tm <Esc>:Pytest method<CR>
-" cycle through test errors
-nmap <silent><Leader>tn <Esc>:Pytest next<CR>
-nmap <silent><Leader>tp <Esc>:Pytest previous<CR>
-nmap <silent><Leader>te <Esc>:Pytest error<CR>
 
 " vim -b : edit binary using xxd-format!
 augroup Binary
@@ -303,22 +263,51 @@ augroup Binary
 augroup END
 
 
-let g:syntastic_cpp_config_file = '.clang_complete'
-
 au BufRead,BufNewFile *.thrift set filetype=thrift
-au! Syntax thrift source ~/.vim/thrift.vim"
-
-"let loaded_matchparen=1 " Don't load matchit.vim (paren/bracket matching)
-"set noshowmatch         " Don't match parentheses/brackets
-"set nocursorline        " Don't paint cursor line
-"set nocursorcolumn      " Don't paint cursor column
-"set lazyredraw          " Wait to redraw
-"set scrolljump=8        " Scroll 8 lines at a time at bottom/top
-"let html_no_rendering=1 " Don't render italic, bold, links in HTML"
-"set noruler
 
 "" tagbar
 autocmd VimEnter * nested :call tagbar#autoopen(1)
 autocmd FileType * nested :call tagbar#autoopen(0)
 
 autocmd! BufWritePost * Neomake
+
+nnoremap <leader>jd :YcmCompleter GoTo<CR>
+
+" Vimux
+
+nnoremap <leader>rp :VimuxPromptCommand<CR>
+nnoremap <leader>rl :VimuxRunLastCommand<CR>
+
+" EasyMotion
+" <Leader>f{char} to move to {char}
+map  <Leader>f <Plug>(easymotion-bd-f)
+nmap <Leader>f <Plug>(easymotion-overwin-f)
+
+" s{char}{char} to move to {char}{char}
+nmap s <Plug>(easymotion-overwin-f2)
+
+" Move to line
+map <Leader>L <Plug>(easymotion-bd-jk)
+nmap <Leader>L <Plug>(easymotion-overwin-line)
+
+" Move to word
+map  <Leader>w <Plug>(easymotion-bd-w)
+nmap <Leader>w <Plug>(easymotion-overwin-w)
+
+" Gif config
+map <Leader>l <Plug>(easymotion-lineforward)
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
+map <Leader>h <Plug>(easymotion-linebackward)
+
+let g:EasyMotion_startofline = 0 " keep cursor column when JK motion
+
+if exists(":Tabularize")
+    nmap <Leader>a= :Tabularize /=<CR>
+    vmap <Leader>a= :Tabularize /=<CR>
+    nmap <Leader>a: :Tabularize /:\zs<CR>
+    vmap <Leader>a: :Tabularize /:\zs<CR>
+endif
+
+autocmd QuickFixCmdPost [^l]* nested cwindow
+autocmd QuickFixCmdPost    l* nested lwindow
