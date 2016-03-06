@@ -1,5 +1,11 @@
 # Path to your oh-my-zsh installation.
+export TERM=xterm-256color
+tic ~/.my_config/dotfiles/$TERM.ti
 export ZSH=/Users/d1ff/.oh-my-zsh
+BASE16_SHELL="$HOME/.my_config/base16-shell/base16-default.dark.sh"
+[[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
+alias vim="nvim"
+alias vimdiff="nvim -d"
 
 fpath=(/Users/d1ff/.brew/share/zsh-completions $fpath)
 
@@ -7,7 +13,9 @@ fpath=(/Users/d1ff/.brew/share/zsh-completions $fpath)
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="bullet-train"
+#
+#ZSH_THEME="bullet-train"
+ZSH_THEME="airline"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -55,17 +63,18 @@ ZSH_TMUX_AUTOCONNECT=true
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git-fast boot2docker brew brew-cask django docker docker-compose cp git-flow pip python rsync common-aliases zsh-syntax-highlighting tmux)
+plugins=(vi-mode git-fast boot2docker brew brew-cask django docker docker-compose cp git-flow pip python rsync common-aliases zsh-syntax-highlighting tmux) #history-substring-search)
 
 # User configuration
 
-export PATH="/Users/d1ff/.brew/sbin:/Users/d1ff/.cabal/bin:/Users/d1ff/Programming/Qt5/5.0.1/clang_64/bin:/Users/d1ff/.brew/bin:/Users/d1ff/bin/:/Applications/Android Studio.app/sdk/tools:/Applications/Android Studio.app/sdk/platform-tools:/Users/d1ff/Library/pypy-2.2.1-osx64/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/texbin"
+export PATH="/usr/local/texlive/2015/bin/x86_64-darwin:/Users/d1ff/.brew/sbin:/Users/d1ff/.cabal/bin:/Users/d1ff/.brew/bin:/Users/d1ff/bin/:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/texbin"
 # export MANPATH="/usr/local/man:$MANPATH"
+export EDITOR=vim
 
 source $ZSH/oh-my-zsh.sh
 
 # You may need to manually set your language environment
-# export LANG=en_US.UTF-8
+export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
@@ -89,3 +98,13 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 # if [ "$TMUX" = "" ]; then tmux attach; fi
+#
+# allow ctrl-p, ctrl-n for navigate history (standard behaviour)
+bindkey '^P' history-beginning-search-backward
+bindkey '^N' history-beginning-search-forward
+
+bindkey '^[OA' history-beginning-search-backward
+bindkey '^[OB' history-beginning-search-forward
+
+bindkey -M vicmd 'k' history-beginning-search-backward
+bindkey -M vicmd 'j' history-beginning-search-forward
