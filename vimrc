@@ -1,65 +1,145 @@
-source ~/.vim_github_issues
+let g:python2_host_prog=expand('~/.brew/bin/python2')
+let g:python3_host_prog=expand('~/.brew/bin/python3')
+let g:ycm_python_binary_path = expand('~/.brew/bin/python3')
+let g:tagbar_ctags_bin=expand('~/.brew/bin/ctags')
+call plug#begin('~/.vim/plugged')
+Plug 'noahfrederick/vim-noctu'
+Plug 'elzr/vim-json'
+Plug 'calebsmith/vim-lambdify'
+Plug 'sheerun/vim-polyglot'
+Plug 'frankier/neovim-colors-solarized-truecolor-only'
+Plug 'michaeljsmith/vim-indent-object'
+Plug 'eugen0329/vim-esearch'
+Plug 'idanarye/vim-merginal'
+Plug 'Include-Fixer-for-CCpp', { 'for': 'cpp'}
+Plug 'kien/rainbow_parentheses.vim'
+Plug 'Bling/vim-airline'
+Plug 'Chiel92/vim-autoformat'
+Plug 'Glench/Vim-Jinja2-Syntax'
+Plug 'LucHermitte/lh-cmake'
+Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+Plug 'ternjs/tern_for_vim'
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --racer-completer --tern-completer' }
+Plug 'airblade/vim-gitgutter'
+Plug 'artur-shaik/vim-javacomplete2'
+Plug 'benekastah/neomake'
+Plug 'benmills/vimux'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'clones/vim-l9'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'cwood/vim-django'
+Plug 'd1ff/vim-cmake-project'
+Plug 'easymotion/vim-easymotion'
+Plug 'edkolev/promptline.vim'
+Plug 'edkolev/tmuxline.vim'
+Plug 'diepm/vim-rest-console'
+Plug 'godlygeek/tabular'
+Plug 'hsanson/vim-android'
+Plug 'jalvesaq/vimcmdline'
+Plug 'janko-m/vim-test'
+Plug 'jaxbot/github-issues.vim'
+Plug 'jistr/vim-nerdtree-tabs'
+Plug 'majutsushi/tagbar'
+Plug 'moll/vim-bbye'
+Plug 'nanotech/jellybeans.vim'
+Plug 'Yggdroot/indentLine'
+Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
+Plug 'rust-lang/rust.vim'
+Plug 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdtree'
+Plug 'slurps-mad-rips/cmake.vim', { 'for': 'cmake' }
+Plug 'szw/vim-tags'
+Plug 'terryma/vim-expand-region'
+Plug 'tmux-plugins/vim-tmux'
+Plug 'tmux-plugins/vim-tmux-focus-events'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'vim-scripts/TagHighlight'
+call plug#end()
+"set relativenumber
+let g:indentLine_concealcursor = 'vc' "(default 'inc')
+set concealcursor=vc
+let g:indentLine_char='┆'
+
+"let base16colorspace=256
+set t_Co=256
+set background=light
+colorscheme default
+"colorscheme solarized
+" cterm=underline ctermfg=217 ctermbg=16 gui=underline guifg=#f0a0c0 guibg=#302028
+
+"colorscheme jellybeans
+
+" vim-autoformat
+let g:autoformat_autoindent = 0
+let g:autoformat_retab = 0
+let g:autoformat_remove_trailing_spaces = 0
+
 " indent-guides
 let g:indent_guides_guide_size = 1
 let g:indent_guides_enable_on_vim_startup = 1
 
-call plug#begin('~/.vim/plugged')
-
-Plug 'godlygeek/tabular'
-Plug 'easymotion/vim-easymotion'
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'tpope/vim-surround'
-
+" github issues
+source ~/.vim_github_issues
 let g:gissues_async_omni = 1
 let g:gissues_lazy_load = 1
-Plug 'jaxbot/github-issues.vim'
-Plug 'nathanaelkane/vim-indent-guides'
-Plug 'tmux-plugins/vim-tmux'
-Plug 'tmux-plugins/vim-tmux-focus-events'
-Plug 'scrooloose/nerdcommenter'
-Plug 'scrooloose/nerdtree'
-Plug 'benmills/vimux'
-Plug 'benekastah/neomake'
-Plug 'chriskempson/base16-vim'
-Plug 'slurps-mad-rips/cmake.vim'
-Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
-Plug 'Valloric/YouCompleteMe'
-Plug 'mattn/emmet-vim'
-Plug 'edkolev/promptline.vim'
-Plug 'edkolev/tmuxline.vim'
-Plug 'leafgarland/typescript-vim'
-Plug 'Bling/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'd1ff/vim-cmake-project'
-Plug 'octol/vim-cpp-enhanced-highlight'
-Plug 'vim-ctrlspace/vim-ctrlspace'
-Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
-Plug 'jistr/vim-nerdtree-tabs'
-Plug 'peterhoeg/vim-qml'
-Plug 'szw/vim-tags'
-Plug 'jalvesaq/vimcmdline'
-Plug 'benmills/vimux'
-Plug 'majutsushi/tagbar'
-Plug 'vim-scripts/TagHighlight'
-Plug 'clones/vim-fuzzyfinder'
-Plug 'clones/vim-l9'
-Plug 'LucHermitte/lh-cmake'
+
+" neomake
+" let g:neomake_open_list = 2
+let g:neomake_error_sign = {
+    \ 'text': 'E>',
+    \ 'texthl': 'Error',
+\ }
+let g:neomake_warning_sign = {
+    \ 'text': 'W>',
+    \ 'texthl': 'WarningMsg',
+\ }
+let g:neomake_cpp_clang_maker = {
+            \ 'args': ['-fsyntax-only', '-std=c++14', '-Wall', '-Wextra'],
+            \ 'errorformat':
+            \ '%-G%f:%s:,' .
+            \ '%f:%l:%c: %trror: %m,' .
+            \ '%f:%l:%c: %tarning: %m,' .
+            \ '%f:%l:%c: %m,'.
+            \ '%f:%l: %trror: %m,'.
+            \ '%f:%l: %tarning: %m,'.
+            \ '%f:%l: %m',
+            \ }
+let g:neomake_cpp_clangtidy_maker = {
+            \ 'exe': '/Users/d1ff/.brew/opt/llvm/bin/clang-tidy',
+            \ 'args': ['--checks="modernize-*,readability-*,misc-*,clang-analyzer-*"'],
+            \ 'errorformat':
+            \ '%E%f:%l:%c: fatal error: %m,' .
+            \ '%E%f:%l:%c: error: %m,' .
+            \ '%W%f:%l:%c: warning: %m,' .
+            \ '%-G%\m%\%%(LLVM ERROR:%\|No compilation database found%\)%\@!%.%#,' .
+            \ '%E%m',
+            \ }
+let g:neomake_cpp_enabled_makers = ['clang', 'clangtidy']
+
+" clamp
 let g:clamp_libclang_file = '/Users/d1ff/.vim/plugged/YouCompleteMe/third_party/ycmd/libclang.dylib'
-Plug 'bbchung/Clamp'
-Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+
+" snippets
 let g:UltiSnipsExpandTrigger="<C-x><C-x>"
 let g:UltiSnipsJumpForwardTrigger="<C-]>"
 let g:UltiSnipsJumpBackwardTrigger="<C-[>"
-Plug 'solarnz/thrift.vim'
-Plug 'Glench/Vim-Jinja2-Syntax'
 
-call plug#end()
+" airline 
 
+"let g:airline_theme='jellybeans'
+let g:airline_theme='solarized'
 let g:airline_powerline_fonts = 1
+let g:tmuxline_theme='airline'
+let g:tmuxline_preset = 'powerline'
 let g:tmuxline_powerline_separators = 1
 let g:promptline_powerline_symbols = 1
 let g:ycm_confirm_extra_conf = 0
+let g:ycm_autoclose_preview_window_after_insertion = 1
+let g:airline#extensions#tmuxline#enabled = 0
+"let g:airline#extensions#ycm#enabled = 1
+"let g:airline#extensions#virtualenv#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:cmdline_in_buffer = 0
 
@@ -68,8 +148,8 @@ let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
 filetype plugin indent on
 syntax on
 
+let g:django_projects = expand('~/Programming')
 
-let g:colorsamplerpack_loaded = 1
 let did_install_default_menus = 1
 let did_install_syntax_menu = 1
 let g:user_zen_leader_key = '<D-Space>'
@@ -88,7 +168,9 @@ set hidden
 set wildmenu wildmode=list:longest
 set visualbell
 set cursorline
+hi CursorLine term=bold cterm=bold ctermbg=7
 set ttyfast
+set clipboard=unnamed
 set ruler
 set backspace=indent,eol,start
 set scrolloff=3
@@ -115,7 +197,7 @@ endif
 
 
 " Mappings --------------------------------------------------------------------
-let mapleader = "," 
+let mapleader = "\<Space>" 
 " Cycle through windows
 nnoremap <M-TAB> <C-w><C-w>
 nnoremap <M-S-TAB> <C-w><C-p>
@@ -134,13 +216,13 @@ map <leader>sn ]s
 map <leader>sp [s
 map <leader>sa zg
 map <leader>s? z=
-nmap <leader>f :set fu!<CR>
+"nmap <leader>f :set fu!<CR>
 map <leader>v :vsp $MYVIMRC<CR>
 map <leader>V :source $MYVIMRC<CR>
 
 nmap <leader>cd :FufDir<CR>
 nmap <leader>of :FufFile<CR>
-nmap <leader>bu :CtrlSpace<CR>
+"nmap <leader>bu :CtrlSpace<CR>
 nmap <leader>er :Error<CR>
 nnoremap <silent> <leader>nt :NERDTreeToggle %:p:h<CR>
 nnoremap <silent> <leader>tl :TagbarToggle<CR>
@@ -148,7 +230,7 @@ nnoremap <silent> <leader>tl :TagbarToggle<CR>
 ""Searching yamies
 nnoremap / /\v
 vnoremap / /\v
-nnoremap <leader><space> :noh<cr>
+nnoremap <leader>, :noh<cr>
 "" Navigate mappings
 nnoremap <up> <nop>
 nnoremap <down> <nop>
@@ -188,20 +270,16 @@ autocmd FileType python highlight BadWhitespace ctermbg=red guibg=red
 autocmd FileType cpp set equalprg=astyle
 
 " View opts -------------------------------------------------------------------
-set background=dark
+let g:Guifont='Menlo:h12'
 if has("gui_running")
-    set guifont=Droid\ Sans\ Mono\ for\ Powerline:h12
     "set noantialias " Terminus looks better that way
     set guioptions-=T
     set guioptions-=L
     set guioptions-=r
     set fuopt+=maxhorz
 else
-  set t_Co=256
+    "set t_Co=256
 endif
-let base16colorspace=256
-colorscheme base16-default
-
 " Tag list settings -----------------------------------------------------------
 let Tlist_Use_Right_Window=1
 let Tlist_Enable_Fold_Column=0
@@ -242,8 +320,15 @@ function! ToggleFoldColumn()
         set foldcolumn=0
     endif
 endfunction
-set nofoldenable
+"set nofoldenable
 nnoremap <silent> <leader>fe :set foldenable!<cr>:call ToggleFoldColumn()<cr>
+nnoremap <leader>e za
+
+vnoremap <leader>e zf
+
+"set foldcolumn=1
+"set foldmethod=marker
+set nofoldenable
 
 " Less
 au BufNewFile,BufRead *.less set filetype=less
@@ -270,6 +355,7 @@ autocmd VimEnter * nested :call tagbar#autoopen(1)
 autocmd FileType * nested :call tagbar#autoopen(0)
 
 autocmd! BufWritePost * Neomake
+au BufWrite * :Autoformat
 
 nnoremap <leader>jd :YcmCompleter GoTo<CR>
 
@@ -311,3 +397,57 @@ endif
 
 autocmd QuickFixCmdPost [^l]* nested cwindow
 autocmd QuickFixCmdPost    l* nested lwindow
+
+nnoremap <Leader>o :CtrlP<CR>
+nnoremap <Leader>b :CtrlPBuffer<CR>
+
+" test
+let test#strategy = "vimux"
+nnoremap <Leader>tt :TestFile<CR>
+
+if has('nvim')
+    "set termguicolors
+endif
+
+vmap v <Plug>(expand_region_expand)
+vmap <C-v> <Plug>(expand_region_shrink)
+
+if executable('pt')
+    set grepprg=pt\ --nogroup\ --nocolor
+
+    let g:ctrlp_user_command = 'pt %s -l --nocolor --hidden -g ""'
+    "let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'pt %s -l --nocolor -g ""']
+else
+    let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
+    let g:ctrlp_prompt_mappings = {
+    \ 'AcceptSelection("e")': ['<space>', '<cr>', '<2-LeftMouse>'],
+    \ }
+endif
+
+autocmd FileType java setlocal omnifunc=javacomplete#Complete
+let g:android_sdk_path = expand("~/Library/Android/sdk/")
+let g:gradle_daemon=1
+let g:gradle_quickfix_show=1
+"let g:gradle_bin = expand('~/.brew/bin/gradle')
+
+
+nnoremap <Leader>co :CMakeCompile<CR>
+
+nnoremap <Leader>q :Bdelete<CR>
+"autocmd BufWinEnter *.py setlocal foldexpr=SimpylFold(v:lnum) foldmethod=expr
+"autocmd BufWinLeave *.py setlocal foldexpr< foldmethod<
+"
+let g:esearch = {
+  \ 'adapter':    'pt',
+  \ 'backend':    'nvim',
+  \ 'out':        'win',
+  \ 'batch_size': 1000,
+  \ 'use':        ['visual', 'hlsearch', 'last'],
+  \}
+inoremap jj <Esc>
+
+" Use | and _ to split windows (while preserving original behaviour of [count]bar and [count]_).
+nnoremap <expr><silent> <Bar> v:count == 0 ? "<C-W>v<C-W><Right>" : ":<C-U>normal! 0".v:count."<Bar><CR>"
+nnoremap <expr><silent> _     v:count == 0 ? "<C-W>s<C-W><Down>"  : ":<C-U>normal! ".v:count."_<CR>"
+
+"autocmd CursorHold * nested :w
