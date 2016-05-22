@@ -3,6 +3,8 @@ let g:python3_host_prog=expand('~/.brew/bin/python3')
 let g:ycm_python_binary_path = expand('~/.brew/bin/python3')
 let g:tagbar_ctags_bin=expand('~/.brew/bin/ctags')
 call plug#begin('~/.vim/plugged')
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 Plug 'noahfrederick/vim-noctu'
 Plug 'elzr/vim-json'
 Plug 'calebsmith/vim-lambdify'
@@ -398,8 +400,8 @@ endif
 autocmd QuickFixCmdPost [^l]* nested cwindow
 autocmd QuickFixCmdPost    l* nested lwindow
 
-nnoremap <Leader>o :CtrlP<CR>
-nnoremap <Leader>b :CtrlPBuffer<CR>
+nnoremap <Leader>o :Files<CR>
+nnoremap <Leader>b :Buffers<CR>
 
 " test
 let test#strategy = "vimux"
@@ -414,6 +416,7 @@ vmap <C-v> <Plug>(expand_region_shrink)
 
 if executable('pt')
     set grepprg=pt\ --nogroup\ --nocolor
+    let g:fzf_files_command =  'pt -g ""'
 
     let g:ctrlp_user_command = 'pt %s -l --nocolor --hidden -g ""'
     "let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'pt %s -l --nocolor -g ""']
@@ -451,3 +454,4 @@ nnoremap <expr><silent> <Bar> v:count == 0 ? "<C-W>v<C-W><Right>" : ":<C-U>norma
 nnoremap <expr><silent> _     v:count == 0 ? "<C-W>s<C-W><Down>"  : ":<C-U>normal! ".v:count."_<CR>"
 
 "autocmd CursorHold * nested :w
+let g:clighter_libclang_file = expand('~/.brew/opt/llvm/lib/libclang.3.6.dylib')

@@ -1,6 +1,6 @@
 export TERM=xterm-256color
 export CLICOLOR=1
-
+export FZF_DEFAULT_COMMAND='pt -g ""'
 alias vim="nvim"
 alias vimdiff="nvim -d"
 
@@ -38,8 +38,12 @@ ZSH_HIGHLIGHT_STYLES[comment]=fg=black,bold
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
 
 setopt HIST_IGNORE_ALL_DUPS
-
-ZSH_THEME="airline"
+HISTFILE=$HOME/.zhistory       # enable history saving on shell exit
+setopt APPEND_HISTORY          # append rather than overwrite history file.
+HISTSIZE=1200                  # lines of history to maintain memory
+SAVEHIST=1000                  # lines of history to maintain in history file.
+setopt HIST_EXPIRE_DUPS_FIRST  # allow dups, but expire old ones when I hit HISTSIZE
+setopt EXTENDED_HISTORY        # save timestamp and runtime information
 
 HIST_STAMPS="dd.mm.yyyy"
 
@@ -59,7 +63,10 @@ export LANG=en_US.UTF-8
 source ~/.zplug/init.zsh
 
 #zplug "tevren/gitfast-zsh-plugin"
+zplug "peterhurford/git-it-on.zsh"
+zplug "zplug/zplug"
 zplug "sharat87/zsh-vim-mode"
+zplug "jreese/zsh-titles"
 zplug "plugins/brew", from:oh-my-zsh, nice:10
 zplug "plugins/brew-cask", from:oh-my-zsh, nice:10
 zplug "plugins/gitfast", from:oh-my-zsh, nice:10
@@ -72,6 +79,7 @@ zplug "zsh-users/zsh-syntax-highlighting", nice:10
 zplug "zsh-users/zsh-completions", use:"src"
 zplug "zsh-users/zsh-history-substring-search", nice:11
 zplug "zsh-users/zsh-autosuggestions", nice:12
+zplug "aperezdc/virtualz"
 zplug "d1ff/ca16a0e2ac25738a2063c846e62dc882", from:gist
 
 zplug load
@@ -93,3 +101,8 @@ bindkey '^[[B' history-substring-search-down
 bindkey "$terminfo[kcuu1]" history-substring-search-up
 bindkey "$terminfo[kcud1]" history-substring-search-down
 
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+_fzf_compgen_path() {
+  pt -g "" "$1"
+}

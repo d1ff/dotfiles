@@ -1,0 +1,11 @@
+syntax: glob
+*.orig
+.DS_Store
+*.pyc
+.netrwhist
+*.swp
+*.swo
+tags
+*.un~
+.netrwhist
+vim/cache
