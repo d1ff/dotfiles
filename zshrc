@@ -4,6 +4,7 @@ export FZF_DEFAULT_COMMAND='pt -g ""'
 alias vim="nvim"
 alias vimdiff="nvim -d"
 
+
 autoload -U is-at-least
 
 # To have paths colored instead of underlined
@@ -80,10 +81,12 @@ zplug "zsh-users/zsh-completions", use:"src"
 zplug "zsh-users/zsh-history-substring-search", nice:11
 zplug "zsh-users/zsh-autosuggestions", nice:12
 zplug "aperezdc/virtualz"
+zplug "supercrabtree/k"
 zplug "d1ff/ca16a0e2ac25738a2063c846e62dc882", from:gist
+zplug "~/.brew/share/zsh/site-functions", from:local
+zplug "b4b4r07/enhancd", use:init.sh
 
 zplug load
-
 
 # allow ctrl-p, ctrl-n for navigate history (standard behaviour)
 bindkey '^P' history-beginning-search-backward

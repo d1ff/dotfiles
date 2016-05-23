@@ -128,7 +128,7 @@ let g:UltiSnipsExpandTrigger="<C-x><C-x>"
 let g:UltiSnipsJumpForwardTrigger="<C-]>"
 let g:UltiSnipsJumpBackwardTrigger="<C-[>"
 
-" airline 
+" airline
 
 "let g:airline_theme='jellybeans'
 let g:airline_theme='solarized'
@@ -171,6 +171,7 @@ set wildmenu wildmode=list:longest
 set visualbell
 set cursorline
 hi CursorLine term=bold cterm=bold ctermbg=7
+hi Search ctermbg=11 ctermfg=white
 set ttyfast
 set clipboard=unnamed
 set ruler
@@ -199,7 +200,7 @@ endif
 
 
 " Mappings --------------------------------------------------------------------
-let mapleader = "\<Space>" 
+let mapleader = "\<Space>"
 " Cycle through windows
 nnoremap <M-TAB> <C-w><C-w>
 nnoremap <M-S-TAB> <C-w><C-p>
@@ -287,12 +288,12 @@ let Tlist_Use_Right_Window=1
 let Tlist_Enable_Fold_Column=0
 let Tlist_Compact_Format=1
 set updatetime=1000
-let g:Tlist_Show_One_File = 1 
+let g:Tlist_Show_One_File = 1
 let g:Tlist_GainFocus_On_ToggleOpen = 1
 
 " HTML close tag plugin -------------------------------------------------------
 let g:closetag_html_style=1
-" au Filetype html,xml,xsl source ~/.vim/scripts/closetag.vim 
+" au Filetype html,xml,xsl source ~/.vim/scripts/closetag.vim
 
 " Pascal specific settings ----------------------------------------------------
 au FileType pascal set tabstop=2 shiftwidth=2 softtabstop=2 expandtab
@@ -401,6 +402,7 @@ autocmd QuickFixCmdPost [^l]* nested cwindow
 autocmd QuickFixCmdPost    l* nested lwindow
 
 nnoremap <Leader>o :Files<CR>
+nnoremap <Leader>t :Tags<CR>
 nnoremap <Leader>b :Buffers<CR>
 
 " test
@@ -414,6 +416,8 @@ endif
 vmap v <Plug>(expand_region_expand)
 vmap <C-v> <Plug>(expand_region_shrink)
 
+let g:vim_tags_project_tags_command = "{CTAGS} {OPTIONS} `git ls-files` 2>/dev/null"
+let g:fzf_tags_command =  'ctags `git ls-files`'
 if executable('pt')
     set grepprg=pt\ --nogroup\ --nocolor
     let g:fzf_files_command =  'pt -g ""'
@@ -455,3 +459,6 @@ nnoremap <expr><silent> _     v:count == 0 ? "<C-W>s<C-W><Down>"  : ":<C-U>norma
 
 "autocmd CursorHold * nested :w
 let g:clighter_libclang_file = expand('~/.brew/opt/llvm/lib/libclang.3.6.dylib')
+
+set list lcs=tab:·⁖,trail:¶
+autocmd BufWritePre * :%s/\s\+$//e
