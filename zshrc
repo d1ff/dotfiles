@@ -1,11 +1,12 @@
-export TERM=xterm-256color
+export TERM=screen-256color
+[[ -f "~/.$TERM.ti" ]] && tic ~/.$TERM.ti
 export CLICOLOR=1
 export FZF_DEFAULT_COMMAND='pt -g ""'
 alias vim="nvim"
 alias vimdiff="nvim -d"
 
-
-autoload -U is-at-least
+setopt autocd
+autoload -U is-at-least zmv
 
 # To have paths colored instead of underlined
 typeset -A ZSH_HIGHLIGHT_STYLES
@@ -52,8 +53,9 @@ ZSH_TMUX_AUTOSTART=true
 ZSH_TMUX_AUTOCONNECT=true
 #plugins=(vi-mode git-fast boot2docker brew brew-cask django docker docker-compose cp git-flow pip python rsync common-aliases zsh-syntax-highlighting tmux) #history-substring-search)
 
+export PATH="$HOME/.brew/bin:$PATH"
 export RUST_SRC_PATH="$HOME/Programming/rustc-1.7.0/src"
-export PATH="/usr/local/texlive/2015/bin/x86_64-darwin:/Users/d1ff/.brew/sbin:$HOME/.cargo/bin:/Users/d1ff/.cabal/bin:/Users/d1ff/.brew/bin:/Users/d1ff/bin/:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/texbin"
+export PATH="/usr/local/texlive/2015/bin/x86_64-darwin:$HOME/.brew/sbin:$HOME/.cargo/bin:$HOME/.cabal/bin:$HOME/bin/:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/texbin:$PATH"
 # export MANPATH="/usr/local/man:$MANPATH"
 export EDITOR=nvim
 
@@ -61,32 +63,33 @@ export EDITOR=nvim
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8
 
-source ~/.zplug/init.zsh
+export ZPLUG_HOME=$HOME/.brew/opt/zplug
+source $ZPLUG_HOME/init.zsh
 
 #zplug "tevren/gitfast-zsh-plugin"
+zplug "chrissicool/zsh-256color"
 zplug "peterhurford/git-it-on.zsh"
-zplug "zplug/zplug"
 zplug "sharat87/zsh-vim-mode"
 zplug "jreese/zsh-titles"
-zplug "plugins/brew", from:oh-my-zsh, nice:10
-zplug "plugins/brew-cask", from:oh-my-zsh, nice:10
-zplug "plugins/gitfast", from:oh-my-zsh, nice:10
-zplug "plugins/pip", from:oh-my-zsh
-zplug "plugins/python", from:oh-my-zsh
-zplug "plugins/rsync", from:oh-my-zsh
+zplug "plugins/brew", from:oh-my-zsh, nice:10, lazy:true
+zplug "plugins/brew-cask", from:oh-my-zsh, nice:10, lazy:true
+zplug "plugins/gitfast", from:oh-my-zsh, nice:10, lazy:true
+zplug "plugins/pip", from:oh-my-zsh, lazy:true
+zplug "plugins/python", from:oh-my-zsh, lazy:true
+zplug "plugins/rsync", from:oh-my-zsh, lazy:true
 zplug "plugins/common-aliases", from:oh-my-zsh, nice:11
 zplug "plugins/tmux", from:oh-my-zsh, nice:10
-zplug "zsh-users/zsh-syntax-highlighting", nice:10
+zplug "zsh-users/zsh-syntax-highlighting", nice:19
 zplug "zsh-users/zsh-completions", use:"src"
-zplug "zsh-users/zsh-history-substring-search", nice:11
+zplug "zsh-users/zsh-history-substring-search", nice:12
 zplug "zsh-users/zsh-autosuggestions", nice:12
-zplug "aperezdc/virtualz"
-zplug "supercrabtree/k"
+zplug "aperezdc/virtualz", lazy:true
+zplug "supercrabtree/k", lazy:true
 zplug "d1ff/ca16a0e2ac25738a2063c846e62dc882", from:gist
 zplug "~/.brew/share/zsh/site-functions", from:local
 zplug "b4b4r07/enhancd", use:init.sh
 
-zplug load
+zplug load #2> /dev/null
 
 # allow ctrl-p, ctrl-n for navigate history (standard behaviour)
 bindkey '^P' history-beginning-search-backward
@@ -109,3 +112,18 @@ bindkey "$terminfo[kcud1]" history-substring-search-down
 _fzf_compgen_path() {
   pt -g "" "$1"
 }
+
+export GPG_TTY=$(tty)
+if [ -f "${HOME}/.gpg-agent-info" ]; then
+  . "${HOME}/.gpg-agent-info"
+  export GPG_AGENT_INFO
+fi
+
+SSH_ENV="$HOME/.ssh/environment"
+
+function start_agent {
+    /usr/bin/ssh-add -l > /dev/null;
+}
+
+# Source SSH settings, if applicable
+start_agent

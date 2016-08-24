@@ -1,15 +1,32 @@
+let g:fzf_prefer_tmux = 0
 let g:python2_host_prog=expand('~/.brew/bin/python2')
 let g:python3_host_prog=expand('~/.brew/bin/python3')
 let g:ycm_python_binary_path = expand('~/.brew/bin/python3')
 let g:tagbar_ctags_bin=expand('~/.brew/bin/ctags')
 call plug#begin('~/.vim/plugged')
+Plug 'ervandew/supertab'
+Plug 'Rip-Rip/clang_complete', { 'do': 'nvim -c \"r! git ls-files autoload bin doc plugin\" -c \"$$,$$d _\" -c \"%MkVimball! $@ .\" -c \"q!\" && nvim &< -c \"so %\" -c \"q\"' }
+Plug 'Shougo/neoinclude.vim'
+Plug 'zchee/deoplete-jedi'
+Plug 'Shougo/deoplete.nvim'
+Plug 'hkupty/iron.nvim'
+Plug 'sheerun/vim-polyglot'
+Plug 'sven-strothoff/vim-clang_doxygen'
+Plug 'mrtazz/DoxygenToolkit.vim'
+Plug 'arakashic/chromatica.nvim', { 'for': 'cpp' }
+Plug 'croaky/vim-colors-github'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'tweekmonster/django-plus.vim'
+"Plug 'ryanoasis/vim-devicons'
+Plug 'raimondi/delimitmate'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'noahfrederick/vim-noctu'
+Plug 'morhetz/gruvbox'
 Plug 'elzr/vim-json'
 Plug 'calebsmith/vim-lambdify'
-Plug 'sheerun/vim-polyglot'
 Plug 'frankier/neovim-colors-solarized-truecolor-only'
+"Plug 'altercation/vim-colors-solarized'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'eugen0329/vim-esearch'
 Plug 'idanarye/vim-merginal'
@@ -21,14 +38,12 @@ Plug 'Glench/Vim-Jinja2-Syntax'
 Plug 'LucHermitte/lh-cmake'
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'ternjs/tern_for_vim'
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --racer-completer --tern-completer' }
-Plug 'airblade/vim-gitgutter'
+"Plug 'airblade/vim-gitgutter'
 Plug 'artur-shaik/vim-javacomplete2'
 Plug 'benekastah/neomake'
 Plug 'benmills/vimux'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'clones/vim-l9'
-Plug 'ctrlpvim/ctrlp.vim'
 Plug 'cwood/vim-django'
 Plug 'd1ff/vim-cmake-project'
 Plug 'easymotion/vim-easymotion'
@@ -36,7 +51,7 @@ Plug 'edkolev/promptline.vim'
 Plug 'edkolev/tmuxline.vim'
 Plug 'diepm/vim-rest-console'
 Plug 'godlygeek/tabular'
-Plug 'hsanson/vim-android'
+"Plug 'hsanson/vim-android'
 Plug 'jalvesaq/vimcmdline'
 Plug 'janko-m/vim-test'
 Plug 'jaxbot/github-issues.vim'
@@ -45,7 +60,6 @@ Plug 'majutsushi/tagbar'
 Plug 'moll/vim-bbye'
 Plug 'nanotech/jellybeans.vim'
 Plug 'Yggdroot/indentLine'
-Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
 Plug 'rust-lang/rust.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
@@ -56,10 +70,27 @@ Plug 'tmux-plugins/vim-tmux'
 Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-scripts/TagHighlight'
 call plug#end()
+
+" clang complete conf
+let g:clang_complete_auto = 0
+let g:clang_auto_select = 0
+let g:clang_omnicppcomplete_compliance = 0
+let g:clang_make_default_keymappings = 0
+let g:clang_library_path = expand("~/.brew/opt/llvm/lib/libclang.dylib")
+let g:clang_auto_complete_options = ".clang_complete"
+" deoplete conf
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_smart_case = 1
+let g:deoplete#enable_auto_close_preview = 0
+let g:deoplete#manual_completion_start_length = 0
+
+
 "set relativenumber
+
 let g:indentLine_concealcursor = 'vc' "(default 'inc')
 set concealcursor=vc
 let g:indentLine_char='┆'
@@ -67,9 +98,9 @@ let g:indentLine_char='┆'
 "let base16colorspace=256
 set t_Co=256
 set background=light
-colorscheme default
-"colorscheme solarized
-" cterm=underline ctermfg=217 ctermbg=16 gui=underline guifg=#f0a0c0 guibg=#302028
+"colorscheme default
+let g:solarized_underline=0
+colorscheme solarized
 
 "colorscheme jellybeans
 
@@ -119,9 +150,6 @@ let g:neomake_cpp_clangtidy_maker = {
             \ '%E%m',
             \ }
 let g:neomake_cpp_enabled_makers = ['clang', 'clangtidy']
-
-" clamp
-let g:clamp_libclang_file = '/Users/d1ff/.vim/plugged/YouCompleteMe/third_party/ycmd/libclang.dylib'
 
 " snippets
 let g:UltiSnipsExpandTrigger="<C-x><C-x>"
@@ -173,6 +201,7 @@ set cursorline
 hi CursorLine term=bold cterm=bold ctermbg=7
 hi Search ctermbg=11 ctermfg=white
 set ttyfast
+set lazyredraw
 set clipboard=unnamed
 set ruler
 set backspace=indent,eol,start
@@ -209,7 +238,7 @@ nnoremap <c-s-tab> :bp<cr>
 " Smart way to move btw. windows
 "nnoremap <C-j> <C-W>j
 "nnoremap <C-k> <C-W>k
-nnoremap <C-h> <C-W>h
+"nnoremap <C-h> <C-W>h
 "nnoremap <C-l> <C-W>l
 " Pressing ,ss will toggle and untoggle spell checking
 map <leader>ss :setlocal spell!<cr>
@@ -354,8 +383,8 @@ augroup END
 au BufRead,BufNewFile *.thrift set filetype=thrift
 
 "" tagbar
-autocmd VimEnter * nested :call tagbar#autoopen(1)
-autocmd FileType * nested :call tagbar#autoopen(0)
+"autocmd VimEnter * nested :call tagbar#autoopen(1)
+"autocmd FileType * nested :call tagbar#autoopen(0)
 
 autocmd! BufWritePost * Neomake
 au BufWrite * :Autoformat
@@ -458,7 +487,14 @@ nnoremap <expr><silent> <Bar> v:count == 0 ? "<C-W>v<C-W><Right>" : ":<C-U>norma
 nnoremap <expr><silent> _     v:count == 0 ? "<C-W>s<C-W><Down>"  : ":<C-U>normal! ".v:count."_<CR>"
 
 "autocmd CursorHold * nested :w
-let g:clighter_libclang_file = expand('~/.brew/opt/llvm/lib/libclang.3.6.dylib')
-
-set list lcs=tab:·⁖,trail:¶
+let g:clang_doxygen_libclang_library_path = expand('~/.brew/opt/llvm/lib/')
+let g:chromatica#libclang_path = expand('~/.brew/opt/llvm/lib/')
+let g:chomatica#responsive_mode=1
+"set list lcs=trail:¶
 autocmd BufWritePre * :%s/\s\+$//e
+
+nnoremap <C-\>s :YcmCompleter GoToReferences<CR>
+
+autocmd! FocusLost * redraw
+autocmd FileType cpp ChromaticaStart
+au FileType cpp let b:deoplete_ignore_sources = ['buffer', 'tag']
