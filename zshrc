@@ -71,18 +71,18 @@ zplug "chrissicool/zsh-256color"
 zplug "peterhurford/git-it-on.zsh"
 zplug "sharat87/zsh-vim-mode"
 zplug "jreese/zsh-titles"
-zplug "plugins/brew", from:oh-my-zsh, nice:10, lazy:true
-zplug "plugins/brew-cask", from:oh-my-zsh, nice:10, lazy:true
-zplug "plugins/gitfast", from:oh-my-zsh, nice:10, lazy:true
+zplug "plugins/brew", from:oh-my-zsh, defer:1, lazy:true
+zplug "plugins/brew-cask", from:oh-my-zsh, defer:1, lazy:true
+zplug "plugins/gitfast", from:oh-my-zsh, defer:1, lazy:true
 zplug "plugins/pip", from:oh-my-zsh, lazy:true
 zplug "plugins/python", from:oh-my-zsh, lazy:true
 zplug "plugins/rsync", from:oh-my-zsh, lazy:true
-zplug "plugins/common-aliases", from:oh-my-zsh, nice:11
-zplug "plugins/tmux", from:oh-my-zsh, nice:10
-zplug "zsh-users/zsh-syntax-highlighting", nice:19
+zplug "plugins/common-aliases", from:oh-my-zsh, defer:2
+zplug "plugins/tmux", from:oh-my-zsh, defer:1
+zplug "zsh-users/zsh-syntax-highlighting", defer:3
 zplug "zsh-users/zsh-completions", use:"src"
-zplug "zsh-users/zsh-history-substring-search", nice:12
-zplug "zsh-users/zsh-autosuggestions", nice:12
+zplug "zsh-users/zsh-history-substring-search", defer:2
+zplug "zsh-users/zsh-autosuggestions", defer:2
 zplug "aperezdc/virtualz", lazy:true
 zplug "supercrabtree/k", lazy:true
 zplug "d1ff/ca16a0e2ac25738a2063c846e62dc882", from:gist
