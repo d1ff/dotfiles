@@ -53,9 +53,22 @@ ZSH_TMUX_AUTOSTART=true
 ZSH_TMUX_AUTOCONNECT=true
 #plugins=(vi-mode git-fast boot2docker brew brew-cask django docker docker-compose cp git-flow pip python rsync common-aliases zsh-syntax-highlighting tmux) #history-substring-search)
 
-export PATH="$HOME/.brew/bin:$PATH"
+if [[ `uname` == 'Linux' ]]
+then
+    BREW_PATH="$HOME/.linuxbrew"
+    export PATH="$PATH:/usr/local/cuda/bin"
+    export ZPLUG_HOME=$HOME/.zplug
+    export HOMEBREW_BUILD_FROM_SOURCE=1
+    export PATH="$HOME/bin:$BREW_PATH/bin:$PATH"
+    export CFLAGS='-fopenmp -O2 -march=native -ftree-vectorize'
+    export LDFLAGS='-lm -lpthread -lgomp'
+    export LD_LIBRARY_PATH="/opt/intel/mkl/lib/intel64:$LD_LIBRARY_PATH"
+else
+    export ZPLUG_HOME=$HOME/.brew/opt/zplug
+    BREW_PATH="$HOME/.brew"
+    export PATH="/usr/local/texlive/2015/bin/x86_64-darwin:$BREW_PATH/sbin:$HOME/.cargo/bin:$HOME/.cabal/bin:$HOME/bin/:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/texbin:$PATH"
+fi
 export RUST_SRC_PATH="$HOME/Programming/rustc-1.7.0/src"
-export PATH="/usr/local/texlive/2015/bin/x86_64-darwin:$HOME/.brew/sbin:$HOME/.cargo/bin:$HOME/.cabal/bin:$HOME/bin/:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/texbin:$PATH"
 # export MANPATH="/usr/local/man:$MANPATH"
 export EDITOR=nvim
 
@@ -63,7 +76,6 @@ export EDITOR=nvim
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8
 
-export ZPLUG_HOME=$HOME/.brew/opt/zplug
 source $ZPLUG_HOME/init.zsh
 
 #zplug "tevren/gitfast-zsh-plugin"
@@ -127,3 +139,4 @@ function start_agent {
 
 # Source SSH settings, if applicable
 start_agent
+source ~/.zshrc.theme

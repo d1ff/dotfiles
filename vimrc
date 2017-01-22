@@ -1,8 +1,12 @@
 let g:fzf_prefer_tmux = 0
-let g:python2_host_prog=expand('~/.brew/bin/python2')
-let g:python3_host_prog=expand('~/.brew/bin/python3')
-let g:ycm_python_binary_path = expand('~/.brew/bin/python3')
-let g:tagbar_ctags_bin=expand('~/.brew/bin/ctags')
+let g:brew_path = expand('~/.brew')
+if !filereadable(g:brew_path . '/bin/brew')
+    let g:brew_path = expand('~/.linuxbrew')
+endif
+let g:python2_host_prog=g:brew_path.'/bin/python'
+let g:python3_host_prog=g:brew_path.'/bin/python3'
+let g:ycm_python_binary_path = g:python3_host_prog
+let g:tagbar_ctags_bin=g:brew_path.'/bin/ctags'
 call plug#begin('~/.vim/plugged')
 Plug 'ervandew/supertab'
 Plug 'Rip-Rip/clang_complete', { 'do': 'nvim -c \"r! git ls-files autoload bin doc plugin\" -c \"$$,$$d _\" -c \"%MkVimball! $@ .\" -c \"q!\" && nvim &< -c \"so %\" -c \"q\"' }
@@ -80,7 +84,10 @@ let g:clang_complete_auto = 0
 let g:clang_auto_select = 0
 let g:clang_omnicppcomplete_compliance = 0
 let g:clang_make_default_keymappings = 0
-let g:clang_library_path = expand("~/.brew/opt/llvm/lib/libclang.dylib")
+let g:clang_library_path = g:brew_path."/opt/llvm/lib/libclang.dylib"
+if !filereadable(g:clang_library_path)
+    let g:clang_library_path = g:brew_path."/opt/llvm/lib/libclang.so"
+endif
 let g:clang_auto_complete_options = ".clang_complete"
 " deoplete conf
 let g:deoplete#enable_at_startup = 1
@@ -114,9 +121,11 @@ let g:indent_guides_guide_size = 1
 let g:indent_guides_enable_on_vim_startup = 1
 
 " github issues
-source ~/.vim_github_issues
-let g:gissues_async_omni = 1
-let g:gissues_lazy_load = 1
+if filereadable("~/.vim_github_issues")
+    source ~/.vim_github_issues
+    let g:gissues_async_omni = 1
+    let g:gissues_lazy_load = 1
+endif
 
 " neomake
 " let g:neomake_open_list = 2
@@ -140,7 +149,7 @@ let g:neomake_cpp_clang_maker = {
             \ '%f:%l: %m',
             \ }
 let g:neomake_cpp_clangtidy_maker = {
-            \ 'exe': '/Users/d1ff/.brew/opt/llvm/bin/clang-tidy',
+            \ 'exe': g:brew_path.'/opt/llvm/bin/clang-tidy',
             \ 'args': ['--checks="modernize-*,readability-*,misc-*,clang-analyzer-*"'],
             \ 'errorformat':
             \ '%E%f:%l:%c: fatal error: %m,' .
@@ -487,8 +496,8 @@ nnoremap <expr><silent> <Bar> v:count == 0 ? "<C-W>v<C-W><Right>" : ":<C-U>norma
 nnoremap <expr><silent> _     v:count == 0 ? "<C-W>s<C-W><Down>"  : ":<C-U>normal! ".v:count."_<CR>"
 
 "autocmd CursorHold * nested :w
-let g:clang_doxygen_libclang_library_path = expand('~/.brew/opt/llvm/lib/')
-let g:chromatica#libclang_path = expand('~/.brew/opt/llvm/lib/')
+let g:clang_doxygen_libclang_library_path = g:brew_path + "/opt/llvm/lib/"
+let g:chromatica#libclang_path = g:brew_path + "/opt/llvm/lib/"
 let g:chomatica#responsive_mode=1
 "set list lcs=trail:¶
 autocmd BufWritePre * :%s/\s\+$//e
