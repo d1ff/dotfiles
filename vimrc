@@ -8,61 +8,61 @@ let g:python3_host_prog=g:brew_path.'/bin/python3'
 let g:ycm_python_binary_path = g:python3_host_prog
 let g:tagbar_ctags_bin=g:brew_path.'/bin/ctags'
 call plug#begin('~/.vim/plugged')
+"Plug 'vim-scripts/a.vim'
+Plug 'junegunn/vim-slash'
+Plug 'romainl/vim-cool'
+Plug 'jreybert/vimagit'
 Plug 'ervandew/supertab'
-Plug 'Rip-Rip/clang_complete', { 'do': 'nvim -c \"r! git ls-files autoload bin doc plugin\" -c \"$$,$$d _\" -c \"%MkVimball! $@ .\" -c \"q!\" && nvim &< -c \"so %\" -c \"q\"' }
-Plug 'Shougo/neoinclude.vim'
-Plug 'zchee/deoplete-jedi'
+Plug 'Rip-Rip/clang_complete', { 'do': 'nvim -c \"r! git ls-files autoload bin doc plugin\" -c \"$$,$$d _\" -c \"%MkVimball! $@ .\" -c \"q!\" && nvim &< -c \"so %\" -c \"q\"', 'for': ['cpp', 'h']}
+"Plug 'Shougo/neoinclude.vim', { 'for': ['h', 'cpp']}
+Plug 'zchee/deoplete-jedi', { 'for': 'python'}
 Plug 'Shougo/deoplete.nvim'
-Plug 'hkupty/iron.nvim'
+"Plug 'hkupty/iron.nvim'
 Plug 'sheerun/vim-polyglot'
 Plug 'sven-strothoff/vim-clang_doxygen'
-Plug 'mrtazz/DoxygenToolkit.vim'
+"Plug 'mrtazz/DoxygenToolkit.vim', { 'for': 'cpp' }
 Plug 'arakashic/chromatica.nvim', { 'for': 'cpp' }
-Plug 'croaky/vim-colors-github'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tweekmonster/django-plus.vim'
-"Plug 'ryanoasis/vim-devicons'
 Plug 'raimondi/delimitmate'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'noahfrederick/vim-noctu'
-Plug 'morhetz/gruvbox'
-Plug 'elzr/vim-json'
-Plug 'calebsmith/vim-lambdify'
+Plug 'elzr/vim-json', { 'for': 'json' }
+Plug 'calebsmith/vim-lambdify', { 'for': ['python']}
 Plug 'frankier/neovim-colors-solarized-truecolor-only'
-"Plug 'altercation/vim-colors-solarized'
+"Plug 'chemzqm/vim-colors-solarized'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'eugen0329/vim-esearch'
 Plug 'idanarye/vim-merginal'
-Plug 'Include-Fixer-for-CCpp', { 'for': 'cpp'}
+"Plug 'Include-Fixer-for-CCpp', { 'for': 'cpp'}
 Plug 'kien/rainbow_parentheses.vim'
 Plug 'Bling/vim-airline'
 Plug 'Chiel92/vim-autoformat'
 Plug 'Glench/Vim-Jinja2-Syntax'
 Plug 'LucHermitte/lh-cmake'
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
-Plug 'ternjs/tern_for_vim'
-"Plug 'airblade/vim-gitgutter'
-Plug 'artur-shaik/vim-javacomplete2'
+Plug 'ternjs/tern_for_vim', { 'for': 'javascript' }
+Plug 'airblade/vim-gitgutter'
+Plug 'artur-shaik/vim-javacomplete2', { 'for': 'java' }
 Plug 'benekastah/neomake'
 Plug 'benmills/vimux'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'clones/vim-l9'
 Plug 'cwood/vim-django'
-Plug 'd1ff/vim-cmake-project'
+"Plug 'd1ff/vim-cmake-project'
 Plug 'easymotion/vim-easymotion'
 Plug 'edkolev/promptline.vim'
 Plug 'edkolev/tmuxline.vim'
-Plug 'diepm/vim-rest-console'
+"Plug 'diepm/vim-rest-console'
 Plug 'godlygeek/tabular'
 "Plug 'hsanson/vim-android'
-Plug 'jalvesaq/vimcmdline'
-Plug 'janko-m/vim-test'
+"Plug 'jalvesaq/vimcmdline'
+"Plug 'janko-m/vim-test'
 Plug 'jaxbot/github-issues.vim'
 Plug 'jistr/vim-nerdtree-tabs'
 Plug 'majutsushi/tagbar'
 Plug 'moll/vim-bbye'
-Plug 'nanotech/jellybeans.vim'
+"Plug 'nanotech/jellybeans.vim'
 Plug 'Yggdroot/indentLine'
 Plug 'rust-lang/rust.vim'
 Plug 'scrooloose/nerdcommenter'
@@ -72,11 +72,12 @@ Plug 'szw/vim-tags'
 Plug 'terryma/vim-expand-region'
 Plug 'tmux-plugins/vim-tmux'
 Plug 'tmux-plugins/vim-tmux-focus-events'
+Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'vim-scripts/TagHighlight'
+"Plug 'vim-scripts/TagHighlight'
 call plug#end()
 
 " clang complete conf
@@ -95,6 +96,10 @@ let g:deoplete#enable_smart_case = 1
 let g:deoplete#enable_auto_close_preview = 0
 let g:deoplete#manual_completion_start_length = 0
 
+"neoinclude
+au Filetype cpp let b:neoinclude_paths = {
+            \'cpp': expand('~/.brew/include').','.expand('%:p:h')
+            \}
 
 "set relativenumber
 
@@ -103,13 +108,14 @@ set concealcursor=vc
 let g:indentLine_char='┆'
 
 "let base16colorspace=256
-set t_Co=256
+"set t_Co=256
+"set t_8f=^[[38;2;%lu;%lu;%lum  " Needed in tmux
+"set t_8b=^[[48;2;%lu;%lu;%lum  " Ditto
+set termguicolors
 set background=light
 "colorscheme default
 let g:solarized_underline=0
 colorscheme solarized
-
-"colorscheme jellybeans
 
 " vim-autoformat
 let g:autoformat_autoindent = 0
@@ -159,6 +165,7 @@ let g:neomake_cpp_clangtidy_maker = {
             \ '%E%m',
             \ }
 let g:neomake_cpp_enabled_makers = ['clang', 'clangtidy']
+let g:neomake_python_python_exe = 'python3'
 
 " snippets
 let g:UltiSnipsExpandTrigger="<C-x><C-x>"
@@ -166,23 +173,16 @@ let g:UltiSnipsJumpForwardTrigger="<C-]>"
 let g:UltiSnipsJumpBackwardTrigger="<C-[>"
 
 " airline
-
-"let g:airline_theme='jellybeans'
 let g:airline_theme='solarized'
 let g:airline_powerline_fonts = 1
 let g:tmuxline_theme='airline'
 let g:tmuxline_preset = 'powerline'
 let g:tmuxline_powerline_separators = 1
 let g:promptline_powerline_symbols = 1
-let g:ycm_confirm_extra_conf = 0
-let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:airline#extensions#tmuxline#enabled = 0
-"let g:airline#extensions#ycm#enabled = 1
 "let g:airline#extensions#virtualenv#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:cmdline_in_buffer = 0
-
-let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
 
 filetype plugin indent on
 syntax on
@@ -314,10 +314,10 @@ autocmd FileType cpp set equalprg=astyle
 let g:Guifont='Menlo:h12'
 if has("gui_running")
     "set noantialias " Terminus looks better that way
-    set guioptions-=T
-    set guioptions-=L
-    set guioptions-=r
-    set fuopt+=maxhorz
+    "set guioptions-=T
+    "set guioptions-=L
+    "set guioptions-=r
+    "set fuopt+=maxhorz
 else
     "set t_Co=256
 endif
@@ -391,7 +391,8 @@ augroup END
 
 au BufRead,BufNewFile *.thrift set filetype=thrift
 
-"" tagbar
+" tagbar
+let g:tagbar_ctags_bin=expand('~/.brew/bin/ctags')
 "autocmd VimEnter * nested :call tagbar#autoopen(1)
 "autocmd FileType * nested :call tagbar#autoopen(0)
 
@@ -407,8 +408,8 @@ nnoremap <leader>rl :VimuxRunLastCommand<CR>
 
 " EasyMotion
 " <Leader>f{char} to move to {char}
-map  <Leader>f <Plug>(easymotion-bd-f)
-nmap <Leader>f <Plug>(easymotion-overwin-f)
+map  <Leader><Space> <Plug>(easymotion-bd-f)
+nmap <Leader><Space> <Plug>(easymotion-overwin-f)
 
 " s{char}{char} to move to {char}{char}
 nmap s <Plug>(easymotion-overwin-f2)
@@ -447,10 +448,6 @@ nnoremap <Leader>b :Buffers<CR>
 let test#strategy = "vimux"
 nnoremap <Leader>tt :TestFile<CR>
 
-if has('nvim')
-    "set termguicolors
-endif
-
 vmap v <Plug>(expand_region_expand)
 vmap <C-v> <Plug>(expand_region_shrink)
 
@@ -458,15 +455,7 @@ let g:vim_tags_project_tags_command = "{CTAGS} {OPTIONS} `git ls-files` 2>/dev/n
 let g:fzf_tags_command =  'ctags `git ls-files`'
 if executable('pt')
     set grepprg=pt\ --nogroup\ --nocolor
-    let g:fzf_files_command =  'pt -g ""'
-
-    let g:ctrlp_user_command = 'pt %s -l --nocolor --hidden -g ""'
-    "let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'pt %s -l --nocolor -g ""']
-else
-    let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
-    let g:ctrlp_prompt_mappings = {
-    \ 'AcceptSelection("e")': ['<space>', '<cr>', '<2-LeftMouse>'],
-    \ }
+    let g:fzf_files_command = 'pt -g ""'
 endif
 
 autocmd FileType java setlocal omnifunc=javacomplete#Complete
@@ -502,8 +491,7 @@ let g:chomatica#responsive_mode=1
 "set list lcs=trail:¶
 autocmd BufWritePre * :%s/\s\+$//e
 
-nnoremap <C-\>s :YcmCompleter GoToReferences<CR>
-
 autocmd! FocusLost * redraw
-autocmd FileType cpp ChromaticaStart
+"autocmd FileType cpp ChromaticaStart
 au FileType cpp let b:deoplete_ignore_sources = ['buffer', 'tag']
+au CompleteDone * pclose!

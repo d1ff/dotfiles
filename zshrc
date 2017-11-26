@@ -1,4 +1,4 @@
-export TERM=screen-256color
+export TERM=xterm-256color
 [[ -f "~/.$TERM.ti" ]] && tic ~/.$TERM.ti
 export CLICOLOR=1
 export FZF_DEFAULT_COMMAND='pt -g ""'
@@ -7,6 +7,7 @@ alias vimdiff="nvim -d"
 
 setopt autocd
 autoload -U is-at-least zmv
+autoload -U regexp-replace
 
 # To have paths colored instead of underlined
 typeset -A ZSH_HIGHLIGHT_STYLES
@@ -134,7 +135,7 @@ fi
 SSH_ENV="$HOME/.ssh/environment"
 
 function start_agent {
-    /usr/bin/ssh-add -l > /dev/null;
+    /usr/bin/ssh-add -l -A 2> /dev/null;
 }
 
 # Source SSH settings, if applicable
