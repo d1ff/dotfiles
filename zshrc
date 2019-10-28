@@ -4,6 +4,7 @@ export CLICOLOR=1
 export FZF_DEFAULT_COMMAND='pt -g ""'
 alias vim="nvim"
 alias vimdiff="nvim -d"
+export GOPATH=$HOME/go
 
 setopt autocd
 autoload -U is-at-least zmv
@@ -56,11 +57,11 @@ ZSH_TMUX_AUTOCONNECT=true
 
 if [[ `uname` == 'Linux' ]]
 then
-    BREW_PATH="$HOME/.linuxbrew"
-    export PATH="$PATH:/usr/local/cuda/bin"
+    #BREW_PATH="$HOME/.linuxbrew"
+    export PATH="$PATH:$GOPATH/bin:/usr/local/cuda/bin"
     export ZPLUG_HOME=$HOME/.zplug
     export HOMEBREW_BUILD_FROM_SOURCE=1
-    export PATH="$HOME/bin:$BREW_PATH/bin:$PATH"
+    export PATH="$HOME/bin:$PATH"
     export CFLAGS='-fopenmp -O2 -march=native -ftree-vectorize'
     export LDFLAGS='-lm -lpthread -lgomp'
     export LD_LIBRARY_PATH="/opt/intel/mkl/lib/intel64:$LD_LIBRARY_PATH"
@@ -139,5 +140,6 @@ function start_agent {
 }
 
 # Source SSH settings, if applicable
-start_agent
+#start_agent
+eval $(keychain --eval -q id_rsa):
 source ~/.zshrc.theme

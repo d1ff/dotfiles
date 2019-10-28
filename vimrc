@@ -2,11 +2,14 @@ let g:fzf_prefer_tmux = 0
 let g:brew_path = expand('~/.brew')
 if !filereadable(g:brew_path . '/bin/brew')
     let g:brew_path = expand('~/.linuxbrew')
+if !filereadable(g:brew_path . '/bin/brew')
+    let g:brew_path = expand('/usr')
+endif
 endif
 let g:python2_host_prog=g:brew_path.'/bin/python'
 let g:python3_host_prog=g:brew_path.'/bin/python3'
 let g:ycm_python_binary_path = g:python3_host_prog
-let g:tagbar_ctags_bin=g:brew_path.'/bin/ctags'
+"let g:tagbar_ctags_bin=g:brew_path.'/bin/ctags'
 call plug#begin('~/.vim/plugged')
 "Plug 'vim-scripts/a.vim'
 Plug 'junegunn/vim-slash'
@@ -17,6 +20,7 @@ Plug 'Rip-Rip/clang_complete', { 'do': 'nvim -c \"r! git ls-files autoload bin d
 "Plug 'Shougo/neoinclude.vim', { 'for': ['h', 'cpp']}
 Plug 'zchee/deoplete-jedi', { 'for': 'python'}
 Plug 'Shougo/deoplete.nvim'
+Plug 'deoplete-plugins/deoplete-go', { 'do': 'make'}
 "Plug 'hkupty/iron.nvim'
 Plug 'sheerun/vim-polyglot'
 Plug 'sven-strothoff/vim-clang_doxygen'
@@ -48,7 +52,7 @@ Plug 'benekastah/neomake'
 Plug 'benmills/vimux'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'clones/vim-l9'
-Plug 'cwood/vim-django'
+"Plug 'cwood/vim-django'
 "Plug 'd1ff/vim-cmake-project'
 Plug 'easymotion/vim-easymotion'
 Plug 'edkolev/promptline.vim'
@@ -392,7 +396,7 @@ augroup END
 au BufRead,BufNewFile *.thrift set filetype=thrift
 
 " tagbar
-let g:tagbar_ctags_bin=expand('~/.brew/bin/ctags')
+"let g:tagbar_ctags_bin=expand('~/.brew/bin/ctags')
 "autocmd VimEnter * nested :call tagbar#autoopen(1)
 "autocmd FileType * nested :call tagbar#autoopen(0)
 
