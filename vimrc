@@ -24,7 +24,7 @@ Plug 'deoplete-plugins/deoplete-go', { 'do': 'make'}
 "Plug 'hkupty/iron.nvim'
 Plug 'sheerun/vim-polyglot'
 Plug 'sven-strothoff/vim-clang_doxygen'
-"Plug 'mrtazz/DoxygenToolkit.vim', { 'for': 'cpp' }
+Plug 'mrtazz/DoxygenToolkit.vim', { 'for': 'cpp' }
 Plug 'arakashic/chromatica.nvim', { 'for': 'cpp' }
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tweekmonster/django-plus.vim'
@@ -400,7 +400,7 @@ au BufRead,BufNewFile *.thrift set filetype=thrift
 "autocmd VimEnter * nested :call tagbar#autoopen(1)
 "autocmd FileType * nested :call tagbar#autoopen(0)
 
-autocmd! BufWritePost * Neomake
+"autocmd! BufWritePost * Neomake
 au BufWrite * :Autoformat
 
 nnoremap <leader>jd :YcmCompleter GoTo<CR>
