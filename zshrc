@@ -66,9 +66,9 @@ then
     export LDFLAGS='-lm -lpthread -lgomp'
     export LD_LIBRARY_PATH="/opt/intel/mkl/lib/intel64:$LD_LIBRARY_PATH"
 else
-    export ZPLUG_HOME=$HOME/.brew/opt/zplug
-    BREW_PATH="$HOME/.brew"
-    export PATH="/usr/local/texlive/2015/bin/x86_64-darwin:$BREW_PATH/sbin:$HOME/.cargo/bin:$HOME/.cabal/bin:$HOME/bin/:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/texbin:$PATH"
+    export ZPLUG_HOME=/usr/local/opt/zplug
+    BREW_PATH="/usr/local/"
+    export PATH="$BREW_PATH/bin:/usr/local/texlive/2017/bin/x86_64-darwin:$BREW_PATH/sbin:$HOME/.cargo/bin:$HOME/.cabal/bin:$HOME/bin/:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/texbin:$PATH"
 fi
 export RUST_SRC_PATH="$HOME/Programming/rustc-1.7.0/src"
 # export MANPATH="/usr/local/man:$MANPATH"

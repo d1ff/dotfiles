@@ -1,5 +1,5 @@
 let g:fzf_prefer_tmux = 0
-let g:brew_path = expand('~/.brew')
+let g:brew_path = expand('/usr/local')
 if !filereadable(g:brew_path . '/bin/brew')
     let g:brew_path = expand('~/.linuxbrew')
 if !filereadable(g:brew_path . '/bin/brew')
@@ -65,7 +65,7 @@ Plug 'godlygeek/tabular'
 "Plug 'hsanson/vim-android'
 "Plug 'jalvesaq/vimcmdline'
 "Plug 'janko-m/vim-test'
-Plug 'jaxbot/github-issues.vim'
+"Plug 'jaxbot/github-issues.vim'
 Plug 'jistr/vim-nerdtree-tabs'
 Plug 'majutsushi/tagbar'
 Plug 'moll/vim-bbye'
@@ -404,7 +404,7 @@ au BufRead,BufNewFile *.thrift set filetype=thrift
 "autocmd VimEnter * nested :call tagbar#autoopen(1)
 "autocmd FileType * nested :call tagbar#autoopen(0)
 
-autocmd! BufWritePost * Neomake
+"autocmd! BufWritePost * Neomake
 au BufWrite * :Autoformat
 
 nnoremap <leader>jd :YcmCompleter GoTo<CR>
