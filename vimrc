@@ -33,8 +33,9 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'elzr/vim-json', { 'for': 'json' }
 Plug 'calebsmith/vim-lambdify', { 'for': ['python']}
-Plug 'frankier/neovim-colors-solarized-truecolor-only'
-"Plug 'chemzqm/vim-colors-solarized'
+"Plug 'frankier/neovim-colors-solarized-truecolor-only'
+"Plug 'altercation/vim-colors-solarized'
+Plug 'icymind/NeoSolarized'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'eugen0329/vim-esearch'
 Plug 'idanarye/vim-merginal'
@@ -46,6 +47,8 @@ Plug 'Glench/Vim-Jinja2-Syntax'
 Plug 'LucHermitte/lh-cmake'
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'ternjs/tern_for_vim', { 'for': 'javascript' }
+Plug 'yuezk/vim-js'
+Plug 'MaxMEllon/vim-jsx-pretty'
 Plug 'airblade/vim-gitgutter'
 Plug 'artur-shaik/vim-javacomplete2', { 'for': 'java' }
 Plug 'benekastah/neomake'
@@ -71,7 +74,7 @@ Plug 'Yggdroot/indentLine'
 Plug 'rust-lang/rust.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
-Plug 'slurps-mad-rips/cmake.vim', { 'for': 'cmake' }
+"Plug 'slurps-mad-rips/cmake.vim', { 'for': 'cmake' }
 Plug 'szw/vim-tags'
 Plug 'terryma/vim-expand-region'
 Plug 'tmux-plugins/vim-tmux'
@@ -119,7 +122,8 @@ set termguicolors
 set background=light
 "colorscheme default
 let g:solarized_underline=0
-colorscheme solarized
+let g:solarized_termcolors=256
+colorscheme NeoSolarized
 
 " vim-autoformat
 let g:autoformat_autoindent = 0
@@ -400,7 +404,7 @@ au BufRead,BufNewFile *.thrift set filetype=thrift
 "autocmd VimEnter * nested :call tagbar#autoopen(1)
 "autocmd FileType * nested :call tagbar#autoopen(0)
 
-"autocmd! BufWritePost * Neomake
+autocmd! BufWritePost * Neomake
 au BufWrite * :Autoformat
 
 nnoremap <leader>jd :YcmCompleter GoTo<CR>
