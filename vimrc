@@ -8,20 +8,12 @@ endif
 endif
 let g:python2_host_prog=g:brew_path.'/bin/python'
 let g:python3_host_prog=g:brew_path.'/bin/python3'
-let g:ycm_python_binary_path = g:python3_host_prog
 "let g:tagbar_ctags_bin=g:brew_path.'/bin/ctags'
 call plug#begin('~/.vim/plugged')
-"Plug 'vim-scripts/a.vim'
 Plug 'junegunn/vim-slash'
 Plug 'romainl/vim-cool'
 Plug 'jreybert/vimagit'
-Plug 'ervandew/supertab'
-Plug 'Rip-Rip/clang_complete', { 'do': 'nvim -c \"r! git ls-files autoload bin doc plugin\" -c \"$$,$$d _\" -c \"%MkVimball! $@ .\" -c \"q!\" && nvim &< -c \"so %\" -c \"q\"', 'for': ['cpp', 'h']}
-"Plug 'Shougo/neoinclude.vim', { 'for': ['h', 'cpp']}
-Plug 'zchee/deoplete-jedi', { 'for': 'python'}
-Plug 'Shougo/deoplete.nvim'
-Plug 'deoplete-plugins/deoplete-go', { 'do': 'make'}
-"Plug 'hkupty/iron.nvim'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'sheerun/vim-polyglot'
 Plug 'sven-strothoff/vim-clang_doxygen'
 Plug 'mrtazz/DoxygenToolkit.vim', { 'for': 'cpp' }
@@ -33,13 +25,10 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'elzr/vim-json', { 'for': 'json' }
 Plug 'calebsmith/vim-lambdify', { 'for': ['python']}
-"Plug 'frankier/neovim-colors-solarized-truecolor-only'
-"Plug 'altercation/vim-colors-solarized'
 Plug 'icymind/NeoSolarized'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'eugen0329/vim-esearch'
 Plug 'idanarye/vim-merginal'
-"Plug 'Include-Fixer-for-CCpp', { 'for': 'cpp'}
 Plug 'kien/rainbow_parentheses.vim'
 Plug 'Bling/vim-airline'
 Plug 'Chiel92/vim-autoformat'
@@ -50,31 +39,21 @@ Plug 'ternjs/tern_for_vim', { 'for': 'javascript' }
 Plug 'yuezk/vim-js'
 Plug 'MaxMEllon/vim-jsx-pretty'
 Plug 'airblade/vim-gitgutter'
-Plug 'artur-shaik/vim-javacomplete2', { 'for': 'java' }
 Plug 'benekastah/neomake'
 Plug 'benmills/vimux'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'clones/vim-l9'
-"Plug 'cwood/vim-django'
-"Plug 'd1ff/vim-cmake-project'
 Plug 'easymotion/vim-easymotion'
 Plug 'edkolev/promptline.vim'
 Plug 'edkolev/tmuxline.vim'
-"Plug 'diepm/vim-rest-console'
 Plug 'godlygeek/tabular'
-"Plug 'hsanson/vim-android'
-"Plug 'jalvesaq/vimcmdline'
-"Plug 'janko-m/vim-test'
-"Plug 'jaxbot/github-issues.vim'
 Plug 'jistr/vim-nerdtree-tabs'
 Plug 'majutsushi/tagbar'
 Plug 'moll/vim-bbye'
-"Plug 'nanotech/jellybeans.vim'
 Plug 'Yggdroot/indentLine'
 Plug 'rust-lang/rust.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
-"Plug 'slurps-mad-rips/cmake.vim', { 'for': 'cmake' }
 Plug 'szw/vim-tags'
 Plug 'terryma/vim-expand-region'
 Plug 'tmux-plugins/vim-tmux'
@@ -84,29 +63,9 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'vim-airline/vim-airline-themes'
-"Plug 'vim-scripts/TagHighlight'
 call plug#end()
 
-" clang complete conf
-let g:clang_complete_auto = 0
-let g:clang_auto_select = 0
-let g:clang_omnicppcomplete_compliance = 0
-let g:clang_make_default_keymappings = 0
-let g:clang_library_path = g:brew_path."/opt/llvm/lib/libclang.dylib"
-if !filereadable(g:clang_library_path)
-    let g:clang_library_path = g:brew_path."/opt/llvm/lib/libclang.so"
-endif
-let g:clang_auto_complete_options = ".clang_complete"
-" deoplete conf
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#enable_smart_case = 1
-let g:deoplete#enable_auto_close_preview = 0
-let g:deoplete#manual_completion_start_length = 0
-
-"neoinclude
-au Filetype cpp let b:neoinclude_paths = {
-            \'cpp': expand('~/.brew/include').','.expand('%:p:h')
-            \}
+let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-rls', 'coc-pyright']
 
 "set relativenumber
 
@@ -212,6 +171,11 @@ set number ruler
 set autoindent smartindent
 set showmode showcmd
 set hidden
+set nobackup
+set nowritebackup
+set cmdheight=2
+set updatetime=300
+set shortmess+=c
 set wildmenu wildmode=list:longest
 set visualbell
 set cursorline
@@ -237,13 +201,37 @@ set spelllang=ru_yo,en
 set nospell
 if v:version >= 703
     set colorcolumn=85
-
-    set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
-    set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
-    set undodir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
-    set undofile swapfile backup
 endif
 
+" Always show the signcolumn, otherwise it would shift the text each time
+" diagnostics appear/become resolved.
+if has("patch-8.1.1564")
+  " Recently vim can merge signcolumn and number column into one
+  set signcolumn=number
+else
+  set signcolumn=yes
+endif
+
+" Use tab for trigger completion with characters ahead and navigate.
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> to trigger completion.
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
 
 " Mappings --------------------------------------------------------------------
 let mapleader = "\<Space>"
@@ -297,6 +285,40 @@ nnoremap <leader>w <C-w>v<C-w>l
 map <S-Enter> O<Esc>
 map <c-Enter> o<Esc>
 
+" Use `[g` and `]g` to navigate diagnostics
+" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
+endfunction
+
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Symbol renaming.
+nmap <leader>rn <Plug>(coc-rename)
+
+" Formatting selected code.
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
 " Python specific settings -----------------------------------------------------
 func! DeleteTrailingWS()
   exe "normal mz"
@@ -314,6 +336,7 @@ au BufRead,BufNewFile *.py,*.pyw,*.c,*.h set textwidth=79
 au BufRead,BufNewFile *.c,*.h set formatoptions-=c formatoptions-=o formatoptions-=r
 au BufNewFile *.py,*.pyw,*.c,*.h set fileformat=unix
 autocmd FileType python highlight BadWhitespace ctermbg=red guibg=red
+autocmd Filetype python setlocal omnifunc=v:lua.vim.lsp.omnifunc
 
 " c++
 autocmd FileType cpp set equalprg=astyle
@@ -333,7 +356,6 @@ endif
 let Tlist_Use_Right_Window=1
 let Tlist_Enable_Fold_Column=0
 let Tlist_Compact_Format=1
-set updatetime=1000
 let g:Tlist_Show_One_File = 1
 let g:Tlist_GainFocus_On_ToggleOpen = 1
 
@@ -501,5 +523,5 @@ autocmd BufWritePre * :%s/\s\+$//e
 
 autocmd! FocusLost * redraw
 "autocmd FileType cpp ChromaticaStart
-au FileType cpp let b:deoplete_ignore_sources = ['buffer', 'tag']
 au CompleteDone * pclose!
+nnoremap <leader>c :!cargo clippy
