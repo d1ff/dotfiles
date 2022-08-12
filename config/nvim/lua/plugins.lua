@@ -1,0 +1,133 @@
+require('packer').startup(function(use)
+    local function get_setup(name)
+        return string.format('require("setup/%s")', name)
+    end
+
+
+    use 'junegunn/vim-slash'
+    use 'romainl/vim-cool'
+    use 'jreybert/vimagit'
+    use {
+        "williamboman/mason-lspconfig.nvim",
+        requires = {
+            "williamboman/mason.nvim",
+            "neovim/nvim-lspconfig",
+            'hrsh7th/nvim-cmp',
+        },
+        config = get_setup('lsp')
+    }
+    use 'sheerun/vim-polyglot'
+    use { 'elzr/vim-json', ft = { 'json' } }
+    use 'terryma/vim-multiple-cursors'
+    use 'raimondi/delimitmate'
+    use { 'calebsmith/vim-lambdify', ft = { 'python' } }
+    use 'icymind/NeoSolarized'
+    use 'michaeljsmith/vim-indent-object'
+    use 'eugen0329/vim-esearch'
+    use 'idanarye/vim-merginal'
+    use 'kien/rainbow_parentheses.vim'
+    use 'Glench/Vim-Jinja2-Syntax'
+    use 'LucHermitte/lh-cmake'
+    use { 'ternjs/tern_for_vim', ft = { 'javascript' } }
+    use 'yuezk/vim-js'
+    use 'MaxMEllon/vim-jsx-pretty'
+    use 'benmills/vimux'
+    use {
+        'lewis6991/gitsigns.nvim',
+        config = function()
+            require('gitsigns').setup()
+        end
+    }
+    use 'christoomey/vim-tmux-navigator'
+    use 'clones/vim-l9'
+    use 'easymotion/vim-easymotion'
+    use 'edkolev/promptline.vim'
+    use 'edkolev/tmuxline.vim'
+    use 'godlygeek/tabular'
+    use 'majutsushi/tagbar'
+    use 'moll/vim-bbye'
+    use {
+        "lukas-reineke/indent-blankline.nvim",
+        config = function()
+            require("indent_blankline").setup {
+                space_char_blankline = " ",
+                show_current_context = true,
+                show_current_context_start = true,
+            }
+        end
+    }
+    use {
+        'numToStr/Comment.nvim',
+        config = function()
+            require('Comment').setup()
+        end
+    }
+    local devicons = 'kyazdani42/nvim-web-devicons' -- optional, for file icons
+    use {
+        'nvim-lualine/lualine.nvim',
+        requires = {
+            devicons
+        },
+        event = "VimEnter",
+        config = get_setup('lualine')
+    }
+    use {
+      'kyazdani42/nvim-tree.lua',
+      requires = {
+          devicons
+      },
+      tag = 'nightly', -- optional, updated every week. (see issue #1193)
+      config = function()
+          require('nvim-tree').setup()
+      end
+    }
+    use {
+        'nvim-telescope/telescope.nvim', tag = '0.1.0',
+    -- or                            , branch = '0.1.x',
+        requires = { {'nvim-lua/plenary.nvim', devicons} },
+        config = function()
+            require('telescope').setup{}
+        end
+    }
+    use 'szw/vim-tags'
+    use 'terryma/vim-expand-region'
+    use 'tmux-plugins/vim-tmux'
+    use 'tmux-plugins/vim-tmux-focus-events'
+    use 'tpope/vim-abolish'
+    use 'tpope/vim-fugitive'
+    use {
+        "kylechui/nvim-surround",
+        config = function()
+            require("nvim-surround").setup({ })
+        end
+    }
+    use {
+        "windwp/nvim-autopairs",
+        config = function() require("nvim-autopairs").setup {} end
+    }
+    use {
+        'hrsh7th/nvim-cmp',
+        requires = {
+            { 'hrsh7th/cmp-nvim-lsp' },
+            { 'hrsh7th/cmp-buffer'},
+            {'hrsh7th/cmp-path'},
+            {'hrsh7th/cmp-cmdline'},
+            {'hrsh7th/cmp-vsnip'},
+            {'hrsh7th/vim-vsnip'},
+            {"rafamadriz/friendly-snippets"}
+        },
+        config = get_setup('cmp')
+    }
+    use {
+        'nvim-treesitter/nvim-treesitter',
+        run = function() require('nvim-treesitter.install').update({ with_sync = true }) end,
+        config = get_setup("treesitter")
+    }
+    use {
+        'akinsho/bufferline.nvim',
+        tag = "v2.*",
+        requires = devicons,
+        config = get_setup('bufferline')
+    }
+end)
+
