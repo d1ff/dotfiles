@@ -61,6 +61,7 @@ require('packer').startup(function()
     use 'hrsh7th/nvim-cmp'
     use 'hrsh7th/cmp-vsnip'
     use 'hrsh7th/vim-vsnip'
+    use "rafamadriz/friendly-snippets"
 end)
 
 local required_lsps = {
@@ -426,7 +427,15 @@ cmp.setup({
           else
             fallback()
           end
+        end,
+        ['<S-Tab>'] = function(fallback)
+          if cmp.visible() then
+            cmp.select_prev_item()
+          else
+            fallback()
+          end
         end
+
     }),
     sources = cmp.config.sources({
         { name = 'nvim_lsp' },

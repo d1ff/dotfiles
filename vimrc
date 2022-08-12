@@ -1,143 +1,89 @@
 let g:fzf_prefer_tmux = 0
-let g:brew_path = expand('/usr/local')
-if !filereadable(g:brew_path . '/bin/brew')
-    let g:brew_path = expand('~/.linuxbrew')
-if !filereadable(g:brew_path . '/bin/brew')
-    let g:brew_path = expand('/usr')
-endif
-endif
-let g:python2_host_prog=g:brew_path.'/bin/python'
-let g:python3_host_prog=g:brew_path.'/bin/python3'
-"let g:tagbar_ctags_bin=g:brew_path.'/bin/ctags'
-call plug#begin('~/.vim/plugged')
-Plug 'junegunn/vim-slash'
-Plug 'romainl/vim-cool'
-Plug 'jreybert/vimagit'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'sheerun/vim-polyglot'
-Plug 'sven-strothoff/vim-clang_doxygen'
-Plug 'mrtazz/DoxygenToolkit.vim', { 'for': 'cpp' }
-Plug 'arakashic/chromatica.nvim', { 'for': 'cpp' }
-Plug 'terryma/vim-multiple-cursors'
-Plug 'tweekmonster/django-plus.vim'
-Plug 'raimondi/delimitmate'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-Plug 'elzr/vim-json', { 'for': 'json' }
-Plug 'calebsmith/vim-lambdify', { 'for': ['python']}
-Plug 'icymind/NeoSolarized'
-Plug 'michaeljsmith/vim-indent-object'
-Plug 'eugen0329/vim-esearch'
-Plug 'idanarye/vim-merginal'
-Plug 'kien/rainbow_parentheses.vim'
-Plug 'Bling/vim-airline'
-Plug 'Chiel92/vim-autoformat'
-Plug 'Glench/Vim-Jinja2-Syntax'
-Plug 'LucHermitte/lh-cmake'
-Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
-Plug 'ternjs/tern_for_vim', { 'for': 'javascript' }
-Plug 'yuezk/vim-js'
-Plug 'MaxMEllon/vim-jsx-pretty'
-Plug 'airblade/vim-gitgutter'
-Plug 'benekastah/neomake'
-Plug 'benmills/vimux'
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'clones/vim-l9'
-Plug 'easymotion/vim-easymotion'
-Plug 'edkolev/promptline.vim'
-Plug 'edkolev/tmuxline.vim'
-Plug 'godlygeek/tabular'
-Plug 'jistr/vim-nerdtree-tabs'
-Plug 'majutsushi/tagbar'
-Plug 'moll/vim-bbye'
-Plug 'Yggdroot/indentLine'
-Plug 'rust-lang/rust.vim'
-Plug 'scrooloose/nerdcommenter'
-Plug 'scrooloose/nerdtree'
-Plug 'szw/vim-tags'
-Plug 'terryma/vim-expand-region'
-Plug 'tmux-plugins/vim-tmux'
-Plug 'tmux-plugins/vim-tmux-focus-events'
-Plug 'tpope/vim-abolish'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-unimpaired'
-Plug 'vim-airline/vim-airline-themes'
-call plug#end()
+lua <<EOF
 
-let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-rls', 'coc-pyright']
+return require('packer').startup(function()
+use 'junegunn/vim-slash'
+use 'romainl/vim-cool'
+use 'jreybert/vimagit'
+use {'neoclide/coc.nvim', branch = 'release'}
+use 'sheerun/vim-polyglot'
+use 'sven-strothoff/vim-clang_doxygen'
+use { 'mrtazz/DoxygenToolkit.vim', ft = { 'cpp' } }
+use { 'arakashic/chromatica.nvim', ft = { 'cpp' } }
+use 'terryma/vim-multiple-cursors'
+use 'raimondi/delimitmate'
+use { 'junegunn/fzf', run = 'cd ~/.fzf && ./install --all' }
+use 'junegunn/fzf.vim'
+use { 'elzr/vim-json', ft = { 'json' } }
+use { 'calebsmith/vim-lambdify', ft = { 'python' } }
+use 'icymind/NeoSolarized'
+use 'michaeljsmith/vim-indent-object'
+use 'eugen0329/vim-esearch'
+use 'idanarye/vim-merginal'
+use 'kien/rainbow_parentheses.vim'
+use 'Bling/vim-airline'
+use 'Glench/Vim-Jinja2-Syntax'
+use 'LucHermitte/lh-cmake'
+use { 'ternjs/tern_for_vim', ft = { 'javascript' } }
+use 'yuezk/vim-js'
+use 'MaxMEllon/vim-jsx-pretty'
+use 'airblade/vim-gitgutter'
+use 'benmills/vimux'
+use 'christoomey/vim-tmux-navigator'
+use 'clones/vim-l9'
+use 'easymotion/vim-easymotion'
+use 'edkolev/promptline.vim'
+use 'edkolev/tmuxline.vim'
+use 'godlygeek/tabular'
+use 'jistr/vim-nerdtree-tabs'
+use 'majutsushi/tagbar'
+use 'moll/vim-bbye'
+use 'Yggdroot/indentLine'
+use 'rust-lang/rust.vim'
+use 'scrooloose/nerdcommenter'
+use 'scrooloose/nerdtree'
+use 'szw/vim-tags'
+use 'terryma/vim-expand-region'
+use 'tmux-plugins/vim-tmux'
+use 'tmux-plugins/vim-tmux-focus-events'
+use 'tpope/vim-abolish'
+use 'tpope/vim-fugitive'
+use 'tpope/vim-surround'
+use 'tpope/vim-unimpaired'
+use 'vim-airline/vim-airline-themes'
+end)
 
-"set relativenumber
+EOF
+
+let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-rls', 'coc-pyright', 'coc-snippets', 'coc-cmake', 'coc-clangd']
 
 let g:indentLine_concealcursor = 'vc' "(default 'inc')
 set concealcursor=vc
 let g:indentLine_char='┆'
 
-"let base16colorspace=256
-"set t_Co=256
-"set t_8f=^[[38;2;%lu;%lu;%lum  " Needed in tmux
-"set t_8b=^[[48;2;%lu;%lu;%lum  " Ditto
 set termguicolors
 set background=light
-"colorscheme default
 let g:solarized_underline=0
 let g:solarized_termcolors=256
 colorscheme NeoSolarized
-
-" vim-autoformat
-let g:autoformat_autoindent = 0
-let g:autoformat_retab = 0
-let g:autoformat_remove_trailing_spaces = 0
 
 " indent-guides
 let g:indent_guides_guide_size = 1
 let g:indent_guides_enable_on_vim_startup = 1
 
-" github issues
-if filereadable("~/.vim_github_issues")
-    source ~/.vim_github_issues
-    let g:gissues_async_omni = 1
-    let g:gissues_lazy_load = 1
-endif
-
-" neomake
-" let g:neomake_open_list = 2
-let g:neomake_error_sign = {
-    \ 'text': 'E>',
-    \ 'texthl': 'Error',
-\ }
-let g:neomake_warning_sign = {
-    \ 'text': 'W>',
-    \ 'texthl': 'WarningMsg',
-\ }
-let g:neomake_cpp_clang_maker = {
-            \ 'args': ['-fsyntax-only', '-std=c++14', '-Wall', '-Wextra'],
-            \ 'errorformat':
-            \ '%-G%f:%s:,' .
-            \ '%f:%l:%c: %trror: %m,' .
-            \ '%f:%l:%c: %tarning: %m,' .
-            \ '%f:%l:%c: %m,'.
-            \ '%f:%l: %trror: %m,'.
-            \ '%f:%l: %tarning: %m,'.
-            \ '%f:%l: %m',
-            \ }
-let g:neomake_cpp_clangtidy_maker = {
-            \ 'exe': g:brew_path.'/opt/llvm/bin/clang-tidy',
-            \ 'args': ['--checks="modernize-*,readability-*,misc-*,clang-analyzer-*"'],
-            \ 'errorformat':
-            \ '%E%f:%l:%c: fatal error: %m,' .
-            \ '%E%f:%l:%c: error: %m,' .
-            \ '%W%f:%l:%c: warning: %m,' .
-            \ '%-G%\m%\%%(LLVM ERROR:%\|No compilation database found%\)%\@!%.%#,' .
-            \ '%E%m',
-            \ }
-let g:neomake_cpp_enabled_makers = ['clang', 'clangtidy']
-let g:neomake_python_python_exe = 'python3'
-
 " snippets
-let g:UltiSnipsExpandTrigger="<C-x><C-x>"
-let g:UltiSnipsJumpForwardTrigger="<C-]>"
-let g:UltiSnipsJumpBackwardTrigger="<C-[>"
+" Use <C-x><C-x> for trigger snippet expand.
+imap <C-x><C-x> <Plug>(coc-snippets-expand)
+" Use <C-j> for select text for visual placeholder of snippet.
+vmap <C-j> <Plug>(coc-snippets-select)
+" Use <C-j> for jump to next placeholder, it's default of coc.nvim
+let g:coc_snippet_next = '<c-j>'
+" Use <C-k> for jump to previous placeholder, it's default of coc.nvim
+let g:coc_snippet_prev = '<c-k>'
+" Use <C-j> for both expand and jump (make expand higher priority.)
+imap <C-j> <Plug>(coc-snippets-expand-jump)
+" Use <leader>x for convert visual selected code to snippet
+xmap <leader>x  <Plug>(coc-convert-snippet)
 
 " airline
 let g:airline_theme='solarized'
@@ -147,14 +93,11 @@ let g:tmuxline_preset = 'powerline'
 let g:tmuxline_powerline_separators = 1
 let g:promptline_powerline_symbols = 1
 let g:airline#extensions#tmuxline#enabled = 0
-"let g:airline#extensions#virtualenv#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:cmdline_in_buffer = 0
 
 filetype plugin indent on
 syntax on
-
-let g:django_projects = expand('~/Programming')
 
 let did_install_default_menus = 1
 let did_install_syntax_menu = 1
@@ -199,9 +142,7 @@ set shellslash
 set grepprg=grep\ -nH\ $*
 set spelllang=ru_yo,en
 set nospell
-if v:version >= 703
-    set colorcolumn=85
-endif
+set colorcolumn=85
 
 " Always show the signcolumn, otherwise it would shift the text each time
 " diagnostics appear/become resolved.
@@ -240,11 +181,6 @@ nnoremap <M-TAB> <C-w><C-w>
 nnoremap <M-S-TAB> <C-w><C-p>
 nnoremap <C-tab> :bn<cr>
 nnoremap <c-s-tab> :bp<cr>
-" Smart way to move btw. windows
-"nnoremap <C-j> <C-W>j
-"nnoremap <C-k> <C-W>k
-"nnoremap <C-h> <C-W>h
-"nnoremap <C-l> <C-W>l
 " Pressing ,ss will toggle and untoggle spell checking
 map <leader>ss :setlocal spell!<cr>
 
@@ -338,50 +274,10 @@ au BufNewFile *.py,*.pyw,*.c,*.h set fileformat=unix
 autocmd FileType python highlight BadWhitespace ctermbg=red guibg=red
 autocmd Filetype python setlocal omnifunc=v:lua.vim.lsp.omnifunc
 
-" c++
-autocmd FileType cpp set equalprg=astyle
-
-" View opts -------------------------------------------------------------------
-let g:Guifont='Menlo:h12'
-if has("gui_running")
-    "set noantialias " Terminus looks better that way
-    "set guioptions-=T
-    "set guioptions-=L
-    "set guioptions-=r
-    "set fuopt+=maxhorz
-else
-    "set t_Co=256
-endif
-" Tag list settings -----------------------------------------------------------
-let Tlist_Use_Right_Window=1
-let Tlist_Enable_Fold_Column=0
-let Tlist_Compact_Format=1
-let g:Tlist_Show_One_File = 1
-let g:Tlist_GainFocus_On_ToggleOpen = 1
-
-" HTML close tag plugin -------------------------------------------------------
-let g:closetag_html_style=1
-" au Filetype html,xml,xsl source ~/.vim/scripts/closetag.vim
-
-" Pascal specific settings ----------------------------------------------------
-au FileType pascal set tabstop=2 shiftwidth=2 softtabstop=2 expandtab
-
 " Latex settings --------------------------------------------------------------
 let g:tex_flavor='latex'
 au FileType latex :set sw=2
 au FileType latex :set iskeyword+=:
-
-" Syntastic settings ----------------------------------------------------------
-let g:syntastic_enable_signs=1
-
-" Vimwiki settings ------------------------------------------------------------
-let wiki = {}
-let wiki.path = '~/wiki/'
-let wiki.path_html = '~/Sites/wiki/'
-let wiki.nested_syntaxes = {'python': 'python'}
-let wiki.auto_export = 1
-let wiki.html_header = '~/wiki/header.tpl'
-let g:vimwiki_list = [wiki]
 
 " Foldings --------------------------------------------------------------------
 function! ToggleFoldColumn()
@@ -397,14 +293,7 @@ nnoremap <leader>e za
 
 vnoremap <leader>e zf
 
-"set foldcolumn=1
-"set foldmethod=marker
 set nofoldenable
-
-" Less
-au BufNewFile,BufRead *.less set filetype=less
-au BufNewFile,BufRead *.ino set filetype=c
-
 
 " vim -b : edit binary using xxd-format!
 augroup Binary
@@ -420,16 +309,6 @@ augroup END
 
 
 au BufRead,BufNewFile *.thrift set filetype=thrift
-
-" tagbar
-"let g:tagbar_ctags_bin=expand('~/.brew/bin/ctags')
-"autocmd VimEnter * nested :call tagbar#autoopen(1)
-"autocmd FileType * nested :call tagbar#autoopen(0)
-
-"autocmd! BufWritePost * Neomake
-au BufWrite * :Autoformat
-
-nnoremap <leader>jd :YcmCompleter GoTo<CR>
 
 " Vimux
 
@@ -488,18 +367,7 @@ if executable('pt')
     let g:fzf_files_command = 'pt -g ""'
 endif
 
-autocmd FileType java setlocal omnifunc=javacomplete#Complete
-let g:android_sdk_path = expand("~/Library/Android/sdk/")
-let g:gradle_daemon=1
-let g:gradle_quickfix_show=1
-"let g:gradle_bin = expand('~/.brew/bin/gradle')
-
-
-nnoremap <Leader>co :CMakeCompile<CR>
-
 nnoremap <Leader>q :Bdelete<CR>
-"autocmd BufWinEnter *.py setlocal foldexpr=SimpylFold(v:lnum) foldmethod=expr
-"autocmd BufWinLeave *.py setlocal foldexpr< foldmethod<
 "
 let g:esearch = {
   \ 'adapter':    'pt',
@@ -514,14 +382,8 @@ inoremap jj <Esc>
 nnoremap <expr><silent> <Bar> v:count == 0 ? "<C-W>v<C-W><Right>" : ":<C-U>normal! 0".v:count."<Bar><CR>"
 nnoremap <expr><silent> _     v:count == 0 ? "<C-W>s<C-W><Down>"  : ":<C-U>normal! ".v:count."_<CR>"
 
-"autocmd CursorHold * nested :w
-let g:clang_doxygen_libclang_library_path = g:brew_path + "/opt/llvm/lib/"
-let g:chromatica#libclang_path = g:brew_path + "/opt/llvm/lib/"
-let g:chomatica#responsive_mode=1
-"set list lcs=trail:¶
 autocmd BufWritePre * :%s/\s\+$//e
 
 autocmd! FocusLost * redraw
-"autocmd FileType cpp ChromaticaStart
 au CompleteDone * pclose!
 nnoremap <leader>c :!cargo clippy
