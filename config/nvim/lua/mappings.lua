@@ -58,8 +58,8 @@ api.nvim_set_keymap("n", "<leader>,", ":noh<CR>", { noremap = true })
 
 local keys_to_disable = { "<up>", "<down>", "<left>", "<right>" }
 for _, key in ipairs(keys_to_disable) do
-    api.nvim_set_keymap("n", key, "<nop>", { noremap = true })
-    api.nvim_set_keymap("i", key, "<nop>", { noremap = true })
+  api.nvim_set_keymap("n", key, "<nop>", { noremap = true })
+  api.nvim_set_keymap("i", key, "<nop>", { noremap = true })
 end
 api.nvim_set_keymap("i", "<c-l>", "<c-k>l*", { noremap = true })
 api.nvim_set_keymap("n", "j", "gj", { noremap = true })
@@ -117,8 +117,8 @@ nnoremap <leader>rl :VimuxRunLastCommand<CR>
 
 " EasyMotion
 " <Leader>f{char} to move to {char}
-map  <Leader><Space> <Plug>(easymotion-bd-f)
-nmap <Leader><Space> <Plug>(easymotion-overwin-f)
+map  <Leader><space> <Plug>(easymotion-bd-f)
+nmap <Leader><space> <Plug>(easymotion-overwin-f)
 
 " s{char}{char} to move to {char}{char}
 nmap s <Plug>(easymotion-overwin-f2)
@@ -157,13 +157,6 @@ nnoremap <Leader>tt :TestFile<CR>
 vmap v <Plug>(expand_region_expand)
 vmap <C-v> <Plug>(expand_region_shrink)
 
-let g:vim_tags_project_tags_command = "{CTAGS} {OPTIONS} `git ls-files` 2>/dev/null"
-let g:fzf_tags_command =  'ctags `git ls-files`'
-if executable('pt')
-    set grepprg=pt\ --nogroup\ --nocolor
-    let g:fzf_files_command = 'pt -g ""'
-endif
-
 nnoremap <Leader>q :Bdelete<CR>
 "
 let g:esearch = {
@@ -185,4 +178,24 @@ autocmd! FocusLost * redraw
 au CompleteDone * pclose!
 ]])
 
+-- Lua
+vim.api.nvim_set_keymap("n", "<leader>xx", "<cmd>Trouble<cr>",
+  {silent = true, noremap = true}
+)
+vim.api.nvim_set_keymap("n", "<leader>xw", "<cmd>Trouble workspace_diagnostics<cr>",
+  {silent = true, noremap = true}
+)
+vim.api.nvim_set_keymap("n", "<leader>xd", "<cmd>Trouble document_diagnostics<cr>",
+  {silent = true, noremap = true}
+)
+vim.api.nvim_set_keymap("n", "<leader>xl", "<cmd>Trouble loclist<cr>",
+  {silent = true, noremap = true}
+)
+vim.api.nvim_set_keymap("n", "<leader>xq", "<cmd>Trouble quickfix<cr>",
+  {silent = true, noremap = true}
+)
+vim.api.nvim_set_keymap("n", "gR", "<cmd>Trouble lsp_references<cr>",
+  {silent = true, noremap = true}
+)
 
+api.nvim_set_keymap("n", "<leader>1", "<cmd>DocsViewToggle<CR>", { noremap = true })

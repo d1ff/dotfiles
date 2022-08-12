@@ -25,12 +25,7 @@ require('packer').startup(function(use)
     use 'michaeljsmith/vim-indent-object'
     use 'eugen0329/vim-esearch'
     use 'idanarye/vim-merginal'
-    use 'kien/rainbow_parentheses.vim'
     use 'Glench/Vim-Jinja2-Syntax'
-    use 'LucHermitte/lh-cmake'
-    use { 'ternjs/tern_for_vim', ft = { 'javascript' } }
-    use 'yuezk/vim-js'
-    use 'MaxMEllon/vim-jsx-pretty'
     use 'benmills/vimux'
     use {
         'lewis6991/gitsigns.nvim',
@@ -114,7 +109,8 @@ require('packer').startup(function(use)
             {'hrsh7th/cmp-cmdline'},
             {'hrsh7th/cmp-vsnip'},
             {'hrsh7th/vim-vsnip'},
-            {"rafamadriz/friendly-snippets"}
+            {"rafamadriz/friendly-snippets"},
+            { "onsails/lspkind.nvim" }
         },
         config = get_setup('cmp')
     }
@@ -129,5 +125,29 @@ require('packer').startup(function(use)
         requires = devicons,
         config = get_setup('bufferline')
     }
+    -- Lua
+    use {
+      "folke/trouble.nvim",
+      requires = "kyazdani42/nvim-web-devicons",
+      config = function()
+        require("trouble").setup {
+          -- your configuration comes here
+          -- or leave it empty to use the default settings
+          -- refer to the configuration section below
+          --
+        }
+      end
+    }
+use {
+  "amrbashir/nvim-docs-view",
+  opt = true,
+  cmd = { "DocsViewToggle" },
+  config = function()
+    require("docs-view").setup {
+      position = "right",
+      width = 60,
+    }
+  end
+}
 end)
 
