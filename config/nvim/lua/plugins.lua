@@ -6,7 +6,6 @@ require('packer').startup(function(use)
 
     use 'junegunn/vim-slash'
     use 'romainl/vim-cool'
-    use 'jreybert/vimagit'
     use {
         "williamboman/mason-lspconfig.nvim",
         requires = {
@@ -79,9 +78,10 @@ require('packer').startup(function(use)
     use {
         'nvim-telescope/telescope.nvim', tag = '0.1.0',
     -- or                            , branch = '0.1.x',
-        requires = { {'nvim-lua/plenary.nvim', devicons} },
+        requires = { {'nvim-lua/plenary.nvim', devicons, "kdheepak/lazygit.nvim" } },
         config = function()
             require('telescope').setup{}
+            require('telescope').load_extension("lazygit")
         end
     }
     use 'szw/vim-tags'

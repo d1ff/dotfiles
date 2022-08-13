@@ -104,3 +104,5 @@ m.nnoremap("<Bar>",
 m.nnoremap("_",
   'v:count == 0 ? "<C-W>s<C-W><Down>" : ":<C-U>normal! 0".v:count."_<CR>"',
   "expr", "silent")
+
+m.nnoremap("<leader>gg", "<cmd>LazyGit<CR>", "silent")
