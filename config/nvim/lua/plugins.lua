@@ -38,7 +38,7 @@ require('packer').startup(function(use)
     use 'easymotion/vim-easymotion'
     use 'edkolev/promptline.vim'
     use 'edkolev/tmuxline.vim'
-    use 'godlygeek/tabular'
+    use { 'godlygeek/tabular', cmd = "Tabular" }
     use 'majutsushi/tagbar'
     use 'moll/vim-bbye'
     use {
@@ -138,16 +138,27 @@ require('packer').startup(function(use)
         }
       end
     }
-use {
-  "amrbashir/nvim-docs-view",
-  opt = true,
-  cmd = { "DocsViewToggle" },
-  config = function()
-    require("docs-view").setup {
-      position = "right",
-      width = 60,
+    use {
+      "amrbashir/nvim-docs-view",
+      opt = true,
+      cmd = { "DocsViewToggle" },
+      config = function()
+        require("docs-view").setup {
+          position = "right",
+          width = 60,
+        }
+      end
     }
-  end
-}
+    use "b0o/mapx.nvim"
+    use {
+      "folke/which-key.nvim",
+      config = function()
+        require("which-key").setup {
+          -- your configuration comes here
+          -- or leave it empty to use the default settings
+          -- refer to the configuration section below
+        }
+      end
+    }
 end)
 
