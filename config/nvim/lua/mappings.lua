@@ -13,7 +13,7 @@ for keys in pairs(vsnip_mappings) do
   m.smap(keys, mapping, "expr")
 end
 
-local vsnip_text_mappings = {
+--[[ local vsnip_text_mappings = {
   s = "<Plug>(vsnip-select-text)",
   S = "<Plug>(vsnip-cut-text)"
 }
@@ -22,6 +22,7 @@ for keys in pairs(vsnip_text_mappings) do
   m.nmap(keys, vsnip_text_mappings[keys])
   m.xmap(keys, vsnip_text_mappings[keys])
 end
+ ]]
 
 m.nnoremap('<M-TAB>', '<C-w><C-w>')
 m.nnoremap('<M-S-TAB>', '<C-w><C-p>')
@@ -68,23 +69,6 @@ m.nnoremap('<leader>1', '<cmd>DocsViewToggle<CR>')
 m.nnoremap("<leader>rp", "<cmd>VimuxPromptCommand<CR>")
 m.nnoremap("<leader>rl", "<cmd>VimuxRunLastCommand<CR>")
 
--- <Leader>f{char} to move to {char}
-m.map("<leader><space>", "<Plug>(easymotion-bd-f)")
-m.nmap("<leader><space>", "<Plug>(easymotion-overwin-f)")
--- s{char}{char} to move to {char}{char}
-m.nmap("s", "<Plug>(easymotion-overwin-f2)")
--- Move to line
-m.map("<leader>L", "<Plug>(easymotion-bd-jk)")
-m.nmap("<leader>L", "<Plug>(easymotion-overwin-line)")
--- Move to word
-m.map("<leader>w", "<Plug>(easymotion-bd-w)")
-m.nmap("<leader>w", "<Plug>(easymotion-overwin-w)")
--- Gif config
-m.map("<leader>l", "<Plug>(easymotion-lineforward)")
-m.map("<leader>j", "<Plug>(easymotion-j)")
-m.map("<leader>k", "<Plug>(easymotion-k)")
-m.map("<leader>h", "<Plug>(easymotion-linebackward)")
-
 m.nmap("<Leader>a=", "<cmd>Tabularize /=<CR>")
 m.vmap("<Leader>a=", "<cmd>Tabularize /=<CR>")
 m.nmap("<Leader>a:", "<cmd>Tabularize /:\\zs<CR>")
@@ -106,3 +90,5 @@ m.nnoremap("_",
   "expr", "silent")
 
 m.nnoremap("<leader>gg", "<cmd>LazyGit<CR>", "silent")
+
+require('leap').set_default_keymaps()

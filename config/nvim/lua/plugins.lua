@@ -34,7 +34,6 @@ require('packer').startup(function(use)
     }
     use 'christoomey/vim-tmux-navigator'
     use 'clones/vim-l9'
-    use 'easymotion/vim-easymotion'
     use 'edkolev/promptline.vim'
     use 'edkolev/tmuxline.vim'
     use { 'godlygeek/tabular', cmd = "Tabular" }
@@ -159,6 +158,13 @@ require('packer').startup(function(use)
           -- refer to the configuration section below
         }
       end
+    }
+    use {
+        "ggandor/leap.nvim",
+        config = function() 
+            local leap = require("leap")
+            leap.setup {}
+        end
     }
 end)
 
