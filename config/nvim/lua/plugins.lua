@@ -119,12 +119,6 @@ require('packer').startup(function(use)
         run = function() require('nvim-treesitter.install').update({ with_sync = true }) end,
         config = get_setup("treesitter")
     }
-    use {
-        'akinsho/bufferline.nvim',
-        tag = "v2.*",
-        requires = devicons,
-        config = get_setup('bufferline')
-    }
     -- Lua
     use {
       "folke/trouble.nvim",
