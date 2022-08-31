@@ -38,8 +38,10 @@ m.map('<leader>s?', 'z=')
 m.map('<leader>v', ':vsp $MYVIMRC<CR>')
 m.map('<leader>V', ':source $MYVIMRC<CR>')
 m.nmap('<leader>o', '<cmd>Telescope find_files<CR>', 'silent')
+m.nmap('<leader>fg', '<cmd>Telescope live_grep<CR>', 'silent')
 m.nmap('<leader>t', '<cmd>Telescope tags<CR>', 'silent')
 m.nmap('<leader>b', '<cmd>Telescope buffers<CR>', 'silent')
+m.nmap('<leader>vv', '<cmd>Telescope treesitter<CR>', 'silent')
 m.nnoremap('<leader>nt', ':NvimTreeToggle<CR>', 'silent')
 m.nnoremap('<leader>tl', ':TagbarToggle<CR>', 'silent')
 -- Searching
@@ -66,15 +68,10 @@ m.nnoremap('<leader>xq', '<cmd>Trouble quickfix<cr>', 'silent')
 m.nnoremap('gR', '<cmd>Trouble lsp_references<cr>', 'silent')
 m.nnoremap('<leader>1', '<cmd>DocsViewToggle<CR>')
 
-m.nnoremap("<leader>rp", "<cmd>VimuxPromptCommand<CR>")
-m.nnoremap("<leader>rl", "<cmd>VimuxRunLastCommand<CR>")
-
 m.nmap("<Leader>a=", "<cmd>Tabularize /=<CR>")
 m.vmap("<Leader>a=", "<cmd>Tabularize /=<CR>")
 m.nmap("<Leader>a:", "<cmd>Tabularize /:\\zs<CR>")
 m.vmap("<Leader>a:", "<cmd>Tabularize /:\\zs<CR>")
-
-m.nnoremap("<Leader>tt", "<cmd>TestFile<CR>")
 
 m.vmap("v", "<Plug>(expand_region_expand)")
 m.vmap("<C-v>", "<Plug>(expand_region_shrink)")

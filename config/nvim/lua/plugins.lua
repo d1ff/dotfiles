@@ -21,7 +21,6 @@ require('packer').startup(function(use)
     use 'raimondi/delimitmate'
     use { 'calebsmith/vim-lambdify', ft = { 'python' } }
     use 'icymind/NeoSolarized'
-    use 'eugen0329/vim-esearch'
     use 'idanarye/vim-merginal'
     use {
         'lewis6991/gitsigns.nvim',
@@ -30,7 +29,7 @@ require('packer').startup(function(use)
         end
     }
     use 'christoomey/vim-tmux-navigator'
-    use 'clones/vim-l9'
+    -- use 'clones/vim-l9'
     use { 'godlygeek/tabular', cmd = "Tabular" }
     use 'majutsushi/tagbar'
     use 'moll/vim-bbye'
@@ -81,9 +80,7 @@ require('packer').startup(function(use)
         end
     }
     use 'szw/vim-tags'
-    use 'terryma/vim-expand-region'
     use 'tmux-plugins/vim-tmux'
-    use 'tmux-plugins/vim-tmux-focus-events'
     use 'tpope/vim-abolish'
     use 'tpope/vim-fugitive'
     use {
