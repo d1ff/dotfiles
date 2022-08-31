@@ -78,8 +78,10 @@ require('packer').startup(function(use)
     -- or                            , branch = '0.1.x',
         requires = { {'nvim-lua/plenary.nvim', devicons, "kdheepak/lazygit.nvim" } },
         config = function()
-            require('telescope').setup{}
-            require('telescope').load_extension("lazygit")
+            local telescope = require('telescope')
+            telescope.setup{}
+            telescope.load_extension("lazygit")
+            telescope.load_extension("refactoring")
         end
     }
     use 'szw/vim-tags'
@@ -164,6 +166,14 @@ require('packer').startup(function(use)
             local leap = require("leap")
             leap.setup {}
         end
+    }
+    use {
+        "ThePrimeagen/refactoring.nvim",
+        requires = {
+            {"nvim-lua/plenary.nvim"},
+            {"nvim-treesitter/nvim-treesitter"}
+        },
+        config = get_setup('refactoring')
     }
 end)
 

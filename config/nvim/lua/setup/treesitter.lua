@@ -20,7 +20,9 @@ require 'nvim-treesitter.configs'.setup {
         "regex",
         "rust",
         "sql",
-        "vim"
+        "vim",
+        "vue",
+        "yaml",
     },
 
     -- Install parsers synchronously (only applied to `ensure_installed`)
@@ -39,5 +41,13 @@ require 'nvim-treesitter.configs'.setup {
         -- Instead of true it can also be a list of languages
         additional_vim_regex_highlighting = false,
     },
-
+    incremental_selection = {
+        enable = true,
+        keymaps = {
+            init_selection = "gnn",
+            node_incremental = "grn",
+            scope_incremental = "grc",
+            node_decremental = "grm",
+        },
+    },
 }
