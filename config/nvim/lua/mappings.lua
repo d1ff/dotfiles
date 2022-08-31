@@ -106,3 +106,7 @@ vim.api.nvim_set_keymap("n", "<leader>rv", ":lua require('refactoring').debug.pr
 vim.api.nvim_set_keymap("v", "<leader>rv", ":lua require('refactoring').debug.print_var({})<CR>", { noremap = true })
 -- Cleanup function: this remap should be made in normal mode
 vim.api.nvim_set_keymap("n", "<leader>rc", ":lua require('refactoring').debug.cleanup({})<CR>", { noremap = true })
+
+vim.keymap.set("n", "<leader>rn", function()
+  return ":IncRename " .. vim.fn.expand("<cword>")
+end, { expr = true })

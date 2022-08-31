@@ -16,12 +16,11 @@ require('packer').startup(function(use)
         config = get_setup('lsp')
     }
     use 'sheerun/vim-polyglot'
-    use { 'elzr/vim-json', ft = { 'json' } }
-    use 'terryma/vim-multiple-cursors'
+    use 'mg979/vim-visual-multi'
+    use 'smjonas/inc-rename.nvim'
     use 'raimondi/delimitmate'
     use { 'calebsmith/vim-lambdify', ft = { 'python' } }
     use 'icymind/NeoSolarized'
-    use 'michaeljsmith/vim-indent-object'
     use 'eugen0329/vim-esearch'
     use 'idanarye/vim-merginal'
     use 'benmills/vimux'
@@ -33,8 +32,6 @@ require('packer').startup(function(use)
     }
     use 'christoomey/vim-tmux-navigator'
     use 'clones/vim-l9'
-    use 'edkolev/promptline.vim'
-    use 'edkolev/tmuxline.vim'
     use { 'godlygeek/tabular', cmd = "Tabular" }
     use 'majutsushi/tagbar'
     use 'moll/vim-bbye'
