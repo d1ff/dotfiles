@@ -65,7 +65,6 @@ m.nnoremap('<leader>xw', '<cmd>Trouble workspace_diagnostics<cr>', 'silent')
 m.nnoremap('<leader>xd', '<cmd>Trouble document_diagnostics<cr>', 'silent')
 m.nnoremap('<leader>xl', '<cmd>Trouble loclist<cr>', 'silent')
 m.nnoremap('<leader>xq', '<cmd>Trouble quickfix<cr>', 'silent')
-m.nnoremap('gR', '<cmd>Trouble lsp_references<cr>', 'silent')
 m.nnoremap('<leader>1', '<cmd>DocsViewToggle<CR>')
 
 m.nmap("<Leader>a=", "<cmd>Tabularize /=<CR>")

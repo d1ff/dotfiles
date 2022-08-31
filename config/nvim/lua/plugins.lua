@@ -24,6 +24,7 @@ require('packer').startup(function(use)
     use 'idanarye/vim-merginal'
     use {
         'lewis6991/gitsigns.nvim',
+        event = 'VimEnter',
         config = function()
             require('gitsigns').setup()
         end
@@ -71,12 +72,18 @@ require('packer').startup(function(use)
     use {
         'nvim-telescope/telescope.nvim', tag = '0.1.0',
     -- or                            , branch = '0.1.x',
-        requires = { {'nvim-lua/plenary.nvim', devicons, "kdheepak/lazygit.nvim" } },
+        requires = { {
+            'nvim-lua/plenary.nvim', 
+            devicons, 
+            "kdheepak/lazygit.nvim",
+            "gbrlsnchs/telescope-lsp-handlers.nvim"
+        } },
         config = function()
             local telescope = require('telescope')
             telescope.setup{}
             telescope.load_extension("lazygit")
             telescope.load_extension("refactoring")
+            telescope.load_extension('lsp_handlers')
         end
     }
     use 'szw/vim-tags'
