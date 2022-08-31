@@ -2,11 +2,6 @@ require("bufferline").setup{
     options = {
         show_buffer_close_icons = false,
     },
-    highlights = {
-        buffer_selected = {
-          gui = "bold"
-        }
-    }
 }
 vim.cmd [[
 

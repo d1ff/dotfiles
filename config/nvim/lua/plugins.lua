@@ -2,8 +2,8 @@ require('packer').startup(function(use)
     local function get_setup(name)
         return string.format('require("setup/%s")', name)
     end
-
-
+    use {'stevearc/dressing.nvim'}
+    use 'lewis6991/impatient.nvim'
     use 'junegunn/vim-slash'
     use 'romainl/vim-cool'
     use {
@@ -24,7 +24,6 @@ require('packer').startup(function(use)
     use 'michaeljsmith/vim-indent-object'
     use 'eugen0329/vim-esearch'
     use 'idanarye/vim-merginal'
-    use 'Glench/Vim-Jinja2-Syntax'
     use 'benmills/vimux'
     use {
         'lewis6991/gitsigns.nvim',

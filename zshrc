@@ -1,5 +1,5 @@
-export TERM=xterm-256color
-[[ -f "~/.$TERM.ti" ]] && tic ~/.$TERM.ti
+#export TERM=xterm-256color
+#[[ -f "~/.$TERM.ti" ]] && tic ~/.$TERM.ti
 export CLICOLOR=1
 export FZF_DEFAULT_COMMAND='pt -g ""'
 alias vim="nvim"

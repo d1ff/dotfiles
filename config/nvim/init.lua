@@ -3,6 +3,7 @@ local vim = vim
 vim.g.mapleader = " "
 
 require('plugins')
+require('impatient')
 require('options')
 require('mappings')
 
