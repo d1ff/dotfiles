@@ -60,21 +60,3 @@ vim.g.cmdline_in_buffer = 0
 
 vim.g.solarized_underline = 0
 vim.g.solarized_termcolors = 256
-
-vim.g.EasyMotion_startofline = 0
-
-vim.cmd([[
-" test
-let test#strategy = "vimux"
-
-"
-let g:esearch = {
-  \ 'adapter':    'pt',
-  \ 'backend':    'nvim',
-  \ 'out':        'win',
-  \ 'batch_size': 1000,
-  \ 'use':        ['visual', 'hlsearch', 'last'],
-  \}
-
-
-]])

@@ -1,4 +1,4 @@
-local m = require('mapx').setup{}
+local m = require('mapx').setup{ whichkey = true }
 
 local vsnip_mappings = {
   ["<C-x><C-x>"] = "vsnip#expandable() ? '<Plug>'(vsnip-expand)' : '%s'",
@@ -31,19 +31,17 @@ m.nnoremap('<C-s-tab>', ':bp<cr>')
 
 -- Spell checking
 m.nnoremap('<leader>ss', ':setlocal spell!<cr>')
-m.map('<leader>sn', ']s')
-m.map('<leader>sp', '[s')
 m.map('<leader>sa', 'zg')
 m.map('<leader>s?', 'z=')
-m.map('<leader>v', ':vsp $MYVIMRC<CR>')
-m.map('<leader>V', ':source $MYVIMRC<CR>')
-m.nmap('<leader>o', '<cmd>Telescope find_files<CR>', 'silent')
-m.nmap('<leader>fg', '<cmd>Telescope live_grep<CR>', 'silent')
-m.nmap('<leader>t', '<cmd>Telescope tags<CR>', 'silent')
-m.nmap('<leader>b', '<cmd>Telescope buffers<CR>', 'silent')
-m.nmap('<leader>vv', '<cmd>Telescope treesitter<CR>', 'silent')
-m.nnoremap('<leader>nt', ':NvimTreeToggle<CR>', 'silent')
-m.nnoremap('<leader>tl', ':TagbarToggle<CR>', 'silent')
+m.map('<leader>v', ':vsp $MYVIMRC<CR>', "Config: open config file")
+m.map('<leader>V', ':source $MYVIMRC<CR>', "Config: source config file")
+m.nmap('<leader>o', '<cmd>Telescope find_files<CR>', 'silent', "Telescope: open files")
+m.nmap('<leader>fg', '<cmd>Telescope live_grep<CR>', 'silent', "Telescope: live grep")
+m.nmap('<leader>t', '<cmd>Telescope tags<CR>', 'silent', "Telescope: tags")
+m.nmap('<leader>b', '<cmd>Telescope buffers<CR>', 'silent', "Telescope: buffers")
+m.nmap('<leader>vv', '<cmd>Telescope treesitter<CR>', 'silent', "Telescope: symbols")
+m.nnoremap('<leader>nt', ':NvimTreeToggle<CR>', 'silent', "Nvim Tree")
+m.nnoremap('<leader>tl', ':TagbarToggle<CR>', 'silent', "Tagbar")
 -- Searching
 m.nnoremap('/', '/\\v')
 m.vnoremap('/', '/\\v')
@@ -85,24 +83,26 @@ m.nnoremap("_",
   'v:count == 0 ? "<C-W>s<C-W><Down>" : ":<C-U>normal! 0".v:count."_<CR>"',
   "expr", "silent")
 
-m.nnoremap("<leader>gg", "<cmd>LazyGit<CR>", "silent")
+m.nnoremap("<leader>gg", "<cmd>LazyGit<CR>", "silent", "LazyGit")
 
 require('leap').set_default_keymaps()
 
 -- remap to open the Telescope refactoring menu in visual mode
-vim.api.nvim_set_keymap(
-  "v",
+m.vnoremap(
   "<leader>rr",
   "<Esc><cmd>lua require('telescope').extensions.refactoring.refactors()<CR>",
-  { noremap = true }
+  "Telescope: list refactors"
 )
 -- Remap in normal mode and passing { normal = true } will automatically find the variable under the cursor and print it
-vim.api.nvim_set_keymap("n", "<leader>rv", ":lua require('refactoring').debug.print_var({ normal = true })<CR>", { noremap = true })
+m.nnoremap("<leader>rv", ":lua require('refactoring').debug.print_var({ normal = true })<CR>",
+    "Insert debug print statement of a variable under cursor")
 -- Remap in visual mode will print whatever is in the visual selection
-vim.api.nvim_set_keymap("v", "<leader>rv", ":lua require('refactoring').debug.print_var({})<CR>", { noremap = true })
+m.vnoremap("<leader>rv", ":lua require('refactoring').debug.print_var({})<CR>", 
+    "Insert debug print of anything in the visual selection")
 -- Cleanup function: this remap should be made in normal mode
-vim.api.nvim_set_keymap("n", "<leader>rc", ":lua require('refactoring').debug.cleanup({})<CR>", { noremap = true })
+m.nnoremap("<leader>rc", ":lua require('refactoring').debug.cleanup({})<CR>", 
+    "Cleanup debug print statements")
 
-vim.keymap.set("n", "<leader>rn", function()
+m.nmap("<leader>rn", function()
   return ":IncRename " .. vim.fn.expand("<cword>")
-end, { expr = true })
+end, "expr", "Incremental rename")

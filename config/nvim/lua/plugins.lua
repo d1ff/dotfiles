@@ -1,8 +1,12 @@
-require('packer').startup(function(use)
-    local function get_setup(name)
-        return string.format('require("setup/%s")', name)
-    end
-    use {'stevearc/dressing.nvim'}
+local function get_setup(name)
+    return string.format('require("setup/%s")', name)
+end
+
+local devicons = 'kyazdani42/nvim-web-devicons' -- optional, for file icons
+local plenary = 'nvim-lua/plenary.nvim'
+
+local function define_packages(use)
+    use 'stevearc/dressing.nvim'
     use 'lewis6991/impatient.nvim'
     use 'junegunn/vim-slash'
     use 'romainl/vim-cool'
@@ -19,7 +23,6 @@ require('packer').startup(function(use)
     use 'mg979/vim-visual-multi'
     use 'smjonas/inc-rename.nvim'
     use 'raimondi/delimitmate'
-    use { 'calebsmith/vim-lambdify', ft = { 'python' } }
     use 'icymind/NeoSolarized'
     use 'idanarye/vim-merginal'
     use {
@@ -30,7 +33,6 @@ require('packer').startup(function(use)
         end
     }
     use 'christoomey/vim-tmux-navigator'
-    -- use 'clones/vim-l9'
     use { 'godlygeek/tabular', cmd = "Tabular" }
     use 'majutsushi/tagbar'
     use 'moll/vim-bbye'
@@ -50,7 +52,6 @@ require('packer').startup(function(use)
             require('Comment').setup()
         end
     }
-    local devicons = 'kyazdani42/nvim-web-devicons' -- optional, for file icons
     use {
         'nvim-lualine/lualine.nvim',
         requires = {
@@ -70,18 +71,17 @@ require('packer').startup(function(use)
       end
     }
     use {
-        'nvim-telescope/telescope.nvim', tag = '0.1.0',
-    -- or                            , branch = '0.1.x',
-        requires = { {
-            'nvim-lua/plenary.nvim', 
-            devicons, 
+        'nvim-telescope/telescope.nvim', branch = '0.1.x',
+        requires = {
+            plenary,
+            devicons,
             "kdheepak/lazygit.nvim",
             "gbrlsnchs/telescope-lsp-handlers.nvim",
             {
-                'nvim-telescope/telescope-fzf-native.nvim', 
+                'nvim-telescope/telescope-fzf-native.nvim',
                 run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' 
             }
-        } },
+        },
         config = get_setup('telescope')
     }
     use 'szw/vim-tags'
@@ -103,11 +103,11 @@ require('packer').startup(function(use)
         requires = {
             { 'hrsh7th/cmp-nvim-lsp' },
             { 'hrsh7th/cmp-buffer'},
-            {'hrsh7th/cmp-path'},
-            {'hrsh7th/cmp-cmdline'},
-            {'hrsh7th/cmp-vsnip'},
-            {'hrsh7th/vim-vsnip'},
-            {"rafamadriz/friendly-snippets"},
+            { 'hrsh7th/cmp-path' },
+            { 'hrsh7th/cmp-cmdline '},
+            { 'hrsh7th/cmp-vsnip' },
+            { 'hrsh7th/vim-vsnip' },
+            { "rafamadriz/friendly-snippets" },
             { "onsails/lspkind.nvim" }
         },
         config = get_setup('cmp')
@@ -120,7 +120,7 @@ require('packer').startup(function(use)
     -- Lua
     use {
       "folke/trouble.nvim",
-      requires = "kyazdani42/nvim-web-devicons",
+      requires = { devicons },
       config = function()
         require("trouble").setup {
           -- your configuration comes here
@@ -162,10 +162,11 @@ require('packer').startup(function(use)
     use {
         "ThePrimeagen/refactoring.nvim",
         requires = {
-            {"nvim-lua/plenary.nvim"},
+            { plenary },
             {"nvim-treesitter/nvim-treesitter"}
         },
         config = get_setup('refactoring')
     }
-end)
+end
 
+require('packer').startup(define_packages)
