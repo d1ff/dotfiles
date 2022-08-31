@@ -76,15 +76,13 @@ require('packer').startup(function(use)
             'nvim-lua/plenary.nvim', 
             devicons, 
             "kdheepak/lazygit.nvim",
-            "gbrlsnchs/telescope-lsp-handlers.nvim"
+            "gbrlsnchs/telescope-lsp-handlers.nvim",
+            {
+                'nvim-telescope/telescope-fzf-native.nvim', 
+                run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' 
+            }
         } },
-        config = function()
-            local telescope = require('telescope')
-            telescope.setup{}
-            telescope.load_extension("lazygit")
-            telescope.load_extension("refactoring")
-            telescope.load_extension('lsp_handlers')
-        end
+        config = get_setup('telescope')
     }
     use 'szw/vim-tags'
     use 'tmux-plugins/vim-tmux'
