@@ -23,7 +23,6 @@ require('packer').startup(function(use)
     use 'icymind/NeoSolarized'
     use 'eugen0329/vim-esearch'
     use 'idanarye/vim-merginal'
-    use 'benmills/vimux'
     use {
         'lewis6991/gitsigns.nvim',
         config = function()
