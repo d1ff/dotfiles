@@ -16,9 +16,9 @@ hi CursorLine term=bold cterm=bold ctermbg=7
 hi Search ctermbg=11 ctermfg=white
 hi link TelescopeNormal CursorColumn
 hi link TelescopeBorder CursorColumn
-hi link TelescopePromptBorder SignColumn
-hi link TelescopePromptNormal SignColumn
-hi link TelescopePromptPrefix SignColumn
+hi TelescopePromptBorder guifg=#80a0ff guibg=#e6dfcf
+hi link TelescopePromptNormal TelescopePromptBorder
+hi link TelescopePromptPrefix TelescopePromptPrefix
 hi link TelescopeSelection CursorLine
 hi link TelescopePreviewTitle lualine_a_visual
 hi link TelescopePromptTitle lualine_a_insert

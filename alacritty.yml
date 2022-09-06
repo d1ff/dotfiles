@@ -15,7 +15,7 @@ font:
     family: FiraCode Nerd Font Mono
     style: Bold Italic
 
-  size: 10
+  size: 6
 # Colors (Solarized Light)
 colors:
   # Default colors
