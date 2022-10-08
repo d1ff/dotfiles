@@ -51,22 +51,17 @@ HIST_STAMPS="dd.mm.yyyy"
 
 ZSH_TMUX_AUTOSTART=true
 ZSH_TMUX_AUTOCONNECT=true
-#plugins=(vi-mode git-fast boot2docker brew brew-cask django docker docker-compose cp git-flow pip python rsync common-aliases zsh-syntax-highlighting tmux) #history-substring-search)
 
 if [[ `uname` == 'Linux' ]]
 then
-    #BREW_PATH="$HOME/.linuxbrew"
     export PATH="$PATH:$GOPATH/bin:/usr/local/cuda/bin"
     export ZPLUG_HOME=$HOME/.zplug
-    export HOMEBREW_BUILD_FROM_SOURCE=1
     export PATH="$HOME/bin:$PATH"
     export CFLAGS='-fopenmp -O2 -march=native -ftree-vectorize'
     export LDFLAGS='-lm -lpthread -lgomp'
     export LD_LIBRARY_PATH="/opt/intel/mkl/lib/intel64:$LD_LIBRARY_PATH"
 else
     export ZPLUG_HOME=/usr/local/opt/zplug
-    BREW_PATH="/usr/local/"
-    export PATH="$BREW_PATH/bin:/usr/local/texlive/2017/bin/x86_64-darwin:$BREW_PATH/sbin:$HOME/.cargo/bin:$HOME/.cabal/bin:$HOME/bin/:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/texbin:$PATH"
 fi
 export RUST_SRC_PATH="$HOME/Programming/rustc-1.7.0/src"
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -83,8 +78,6 @@ zplug "chrissicool/zsh-256color"
 zplug "peterhurford/git-it-on.zsh"
 zplug "sharat87/zsh-vim-mode"
 zplug "jreese/zsh-titles"
-zplug "plugins/brew", from:oh-my-zsh, defer:1, lazy:true
-zplug "plugins/brew-cask", from:oh-my-zsh, defer:1, lazy:true
 zplug "plugins/gitfast", from:oh-my-zsh, defer:1, lazy:true
 zplug "plugins/pip", from:oh-my-zsh, lazy:true
 zplug "plugins/python", from:oh-my-zsh, lazy:true
@@ -98,7 +91,6 @@ zplug "zsh-users/zsh-autosuggestions", defer:2
 zplug "aperezdc/virtualz", lazy:true
 zplug "supercrabtree/k", lazy:true
 zplug "d1ff/ca16a0e2ac25738a2063c846e62dc882", from:gist
-zplug "~/.brew/share/zsh/site-functions", from:local
 zplug "b4b4r07/enhancd", use:init.sh
 
 zplug load #2> /dev/null

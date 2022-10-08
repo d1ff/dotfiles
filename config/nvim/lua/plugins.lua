@@ -167,6 +167,9 @@ local function define_packages(use)
         },
         config = get_setup('refactoring')
     }
+    use {
+        'liuchengxu/graphviz.vim'
+    }
 end
 
 require('packer').startup(define_packages)
