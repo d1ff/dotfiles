@@ -63,6 +63,7 @@ then
 else
     export ZPLUG_HOME=/usr/local/opt/zplug
 fi
+export PATH="$HOME/.local/bin:$PATH"
 export RUST_SRC_PATH="$HOME/Programming/rustc-1.7.0/src"
 # export MANPATH="/usr/local/man:$MANPATH"
 export EDITOR=nvim
@@ -90,7 +91,7 @@ zplug "zsh-users/zsh-history-substring-search", defer:2
 zplug "zsh-users/zsh-autosuggestions", defer:2
 zplug "aperezdc/virtualz", lazy:true
 zplug "supercrabtree/k", lazy:true
-zplug "d1ff/ca16a0e2ac25738a2063c846e62dc882", from:gist
+#zplug "d1ff/ca16a0e2ac25738a2063c846e62dc882", from:gist
 zplug "b4b4r07/enhancd", use:init.sh
 
 zplug load #2> /dev/null
@@ -132,4 +133,5 @@ function start_agent {
 # Source SSH settings, if applicable
 #start_agent
 eval $(keychain --eval -q id_rsa):
-source ~/.zshrc.theme
+eval "$(starship init zsh)"
+#source ~/.zshrc.theme

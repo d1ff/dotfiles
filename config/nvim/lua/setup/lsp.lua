@@ -7,7 +7,7 @@ local required_lsps = {
     "eslint",
     "html",
     "jsonls",
-    "sumneko_lua",
+    "lua_ls",
     "marksman",
     "pyright",
     "sqlls",
@@ -50,7 +50,7 @@ local on_attach = function(client, bufnr)
     vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, bufopts)
     vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, bufopts)
     vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-    vim.keymap.set('n', '<leader>f', vim.lsp.buf.formatting, bufopts)
+    vim.keymap.set('n', '<leader>f', vim.lsp.buf.format, bufopts)
 end
 
 local lsp_flags = {
@@ -58,7 +58,7 @@ local lsp_flags = {
 }
 
 -- Setup lspconfig.
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 for _, lsp in ipairs(required_lsps) do
     require('lspconfig')[lsp].setup {
