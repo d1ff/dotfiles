@@ -60,13 +60,12 @@ local lsp_flags = {
 -- Setup lspconfig.
 local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
-for _, lsp in ipairs(required_lsps) do
-    require('lspconfig')[lsp].setup {
-        on_attach = on_attach,
-        flags = lsp_flags,
-        capabilities = capabilities
-    }
-end
+vim.lsp.config('*', {
+    on_attach = on_attach,
+    flags = lsp_flags,
+    capabilities = capabilities
+
+})
 
 local telescope = require("telescope")
 telescope.load_extension('lsp_handlers')
